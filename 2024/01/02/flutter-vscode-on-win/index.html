@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flutter 开发之 VS Code 环境配置篇 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="flutter">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Flutter 开发之 VS Code 环境配置篇"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Flutter 开发之 VS Code 环境配置篇</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/01/02/flutter-vscode-on-win/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-01-02T15:26:30.000Z">
+          2024-01-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <blockquote>
+<p>Flutter 为软件开发行业带来了革新：只要一套代码库，即可构建、测试和发布适用于移动、Web、桌面和嵌入式平台的精美应用。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="Flutter-SDK-安装"><a href="#Flutter-SDK-安装" class="headerlink" title="Flutter SDK 安装"></a>Flutter SDK 安装</h2><h3 id="下载-Flutter-SDK"><a href="#下载-Flutter-SDK" class="headerlink" title="下载 Flutter SDK"></a>下载 Flutter SDK</h3><p>在官网选择对应的电脑系统平台（我这里是 Windows），下载最新的 <a target="_blank" rel="noopener" href="https://flutter.cn/docs/get-started/install">flutter sdk</a></p>
+<img src="20240111140921.png">
+
+<img src="20240111140718.png">
+
+<h3 id="解压-Flutter-SDK"><a href="#解压-Flutter-SDK" class="headerlink" title="解压 Flutter SDK"></a>解压 Flutter SDK</h3><p>解压缩下载的文件，把其中的 flutter-sdk 目录整个放在你想放置 Flutter SDK 的路径中（如：D:\dev 目录下）</p>
+<img src="20240111140541.png">
+
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>打开搜索框（默认快捷键：<code>Win+S</code>），输入：env，打开“编辑系统环境变量”，选择“高级”，然后打开“环境变量(N)…”</p>
+<img src="20240111141325.png">
+
+<p>然后在“用户变量”处，新增三项</p>
+<img src="20240111141453.png">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FLUTTER_GIT_URL=&quot;https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git&quot;</span><br><span class="line">PUB_HOSTED_URL=&quot;https://pub.flutter-io.cn&quot;</span><br><span class="line">FLUTTER_STORAGE_BASE_URL=&quot;https://storage.flutter-io.cn&quot;</span><br></pre></td></tr></table></figure>
+
+<p>选中“Path”变量，然后点击“编辑”，在新面板中添加解压后的 flutter sdk 的命令目录路径（我这里是 D:\dev\flutter-sdk\bin）</p>
+<img src="20240111141546.png">
+
+<img src="20240111141657.png">
+
+<p>打开 cmd 窗口，键入 flutter doctor，执行检查，查看确实的配置项。</p>
+<h2 id="安装并配置-Java-环境"><a href="#安装并配置-Java-环境" class="headerlink" title="安装并配置 Java 环境"></a>安装并配置 Java 环境</h2><h3 id="下载-JDK-17"><a href="#下载-JDK-17" class="headerlink" title="下载 JDK 17"></a>下载 JDK 17</h3><p>打开官网，切换到对应的操作系统平台，下载 <a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java17">JDK 17</a></p>
+<img src="20240111141809.png">
+
+<h3 id="配置环境变量-1"><a href="#配置环境变量-1" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>将下载好的文件安装到默认位置，然后打开 “编辑系统环境变量”面板，选择“高级”选项，进入“环境变量”编辑面板，在“系统变量”栏新增一项 JAVA_HOME，对应的值是jdk的安装目录，如下所示：</p>
+<img src="20240111141957.png">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=&quot;C:\Program Files\Java\jdk-17&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后双击打开“Path”变量编辑面板，新增两项：</p>
+<img src="20240111142045.png">
+
+<img src="20240111142145.png">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">%</span><span class="language-bash">JAVA_HOME%\bin</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">JAVA_HOME%\jre\bin</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装并配置-Android-SDK-环境"><a href="#安装并配置-Android-SDK-环境" class="headerlink" title="安装并配置 Android SDK 环境"></a>安装并配置 Android SDK 环境</h2><h3 id="下载-Android-SDK"><a href="#下载-Android-SDK" class="headerlink" title="下载 Android SDK"></a>下载 Android SDK</h3><p>打开官网链接，下载对应平台的 <a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio?hl=zh-cn">Android SDK</a></p>
+<blockquote>
+<p>注1：建议切换到英文环境，可以确保下载的是最新版本<br>注2：这里仅下载命令行工具，若下载 Android Studio，则不需要要看后面的操作</p>
+</blockquote>
+<img src="20240111142236.png">
+
+<h3 id="解压Android-SDK"><a href="#解压Android-SDK" class="headerlink" title="解压Android SDK"></a>解压Android SDK</h3><p>解压缩下载的文件，然后把其中的 android-sdk 目录整个放在你想放置 Android SDK 的路径中（如：D:\dev 目录下）</p>
+<img src="20240111142339.png">
+
+<h3 id="更新-Android-SDK-命令行工具"><a href="#更新-Android-SDK-命令行工具" class="headerlink" title="更新 Android SDK 命令行工具"></a>更新 Android SDK 命令行工具</h3><p>进入 <code>android-sdk\cmdline-tools\</code> 目录，然后新建一个 <code>/latest</code>文件夹，并将其余文件和文件夹都移到 <code>/latest</code>文件夹下。</p>
+<p>然后打开 cmd 命令行窗口，执行（执行完毕后请勿关闭，后续还需用到）：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到 android-sdk 的命令目录下</span></span><br><span class="line"><span class="comment"># D:\ 这一句是 Windows 切换盘符所需</span></span><br><span class="line"><span class="built_in">cd</span> D:\dev\android<span class="literal">-sdk</span>\cmdline<span class="literal">-tools</span>\latest\bin</span><br><span class="line">D:\</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新 android-sdk 命令行工具到最新</span></span><br><span class="line"><span class="comment"># 执行这一步时，如果没有前面的新建 latest 目录，并将其余文件移到该目录下</span></span><br><span class="line"><span class="comment"># 则会提示缺少 latest 目录</span></span><br><span class="line">sdkmanager <span class="literal">--install</span> <span class="string">&quot;cmdline-tools;latest&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-SDK-基本组件"><a href="#安装-SDK-基本组件" class="headerlink" title="安装 SDK 基本组件"></a>安装 SDK 基本组件</h3><p>需要的基本组件如下所示（选择目前最新的 <code>android-34</code>版本）：</p>
+<ul>
+<li>platform-tools</li>
+<li>android-34</li>
+<li>build-tools-34.0.0</li>
+</ul>
+<p>打开官网链接：<a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/releases/platform-tools?hl=zh-cn">platforms-tools</a>、<a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/releases/build-tools?hl=zh-cn">build-tools</a>，查看对应的版本（这里建议安装最新版本），返回上一步的 cmd 命令窗口，执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装platforms-tools</span></span><br><span class="line">sdkmanager platform<span class="literal">-tools</span> <span class="string">&quot;platforms;android-34&quot;</span> <span class="string">&quot;build-tools;34.0.0&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置环境变量-2"><a href="#配置环境变量-2" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>等待安装完成后，再次打开“编辑变量”编辑面板，在“系统变量”一栏新增一项 ANDROID_HOME ：</p>
+<img src="20240111142612.png">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">值是对应的 android-sdk 目录路径</span></span><br><span class="line">ANDROID_HOME=&quot;D:\dev\android-sdk&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后双击打开“Path”变量，新建一项：</p>
+<img src="20240111142045.png">
+
+<img src="20240111142448.png">
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">%</span><span class="language-bash">ANDROID_HOME%\cmdline-tools\latest\bin</span></span><br></pre></td></tr></table></figure>
+
+<p>打开 cmd 命令窗口，执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">协议确认，看到提示时输入 y，回车就可以了</span></span><br><span class="line">flutter doctor --android-licenses</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装第三方模拟器"><a href="#安装第三方模拟器" class="headerlink" title="安装第三方模拟器"></a>安装第三方模拟器</h2><h3 id="下载和安装逍遥模拟器"><a href="#下载和安装逍遥模拟器" class="headerlink" title="下载和安装逍遥模拟器"></a>下载和安装逍遥模拟器</h3><p>打开官网链接，下载并安装<a target="_blank" rel="noopener" href="http://www.xyaz.cn/">逍遥模拟器</a></p>
+<p>运行“逍遥多开器”，然后新建一个安卓9.0模拟器（默认的7.1模拟器版本过低）)</p>
+<h3 id="替换逍遥模拟器的-adb-exe-文件"><a href="#替换逍遥模拟器的-adb-exe-文件" class="headerlink" title="替换逍遥模拟器的 adb.exe 文件"></a>替换逍遥模拟器的 <code>adb.exe</code> 文件</h3><blockquote>
+<p>替换 <code>adb.exe</code> 文件是为了确保使用相同版本的安卓调试桥</p>
+</blockquote>
+<p>复制 android-sdk 下（我的是 D:\dev\android-sdk\platform-tools）的 adb.exe 文件，到“逍遥模拟器”的安装目录下（我的是 D:\Promram Files\Microvirt\MEmu），替换掉“逍遥模拟器”自带 adb.exe 文件</p>
+<h3 id="连接逍遥模拟器"><a href="#连接逍遥模拟器" class="headerlink" title="连接逍遥模拟器"></a>连接逍遥模拟器</h3><p>新建一个bat批处理文件（如：connect_xy.bat），输入：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">kill</span><span class="literal">-server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若只有一个模拟器，则默认端口号是21503，这里新增了一个安卓9.0模拟器，所以端口号是20513</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">21513</span></span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p>启动逍遥模拟器后，双击上面创建的bat批处理文件，若看到如下结果，则表明已成功连接“逍遥模拟器”</p>
+<img src="20240111143314.png">
+
+<p>VS Code 也能看到已连接成功：</p>
+<img src="20240111143614.png" style="width: 70%">
+
+<img src="20240111143531.png">
+
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><h3 id="执行-flutter-doctor-检查"><a href="#执行-flutter-doctor-检查" class="headerlink" title="执行 flutter doctor 检查"></a>执行 <code>flutter doctor</code> 检查</h3><p>完成以上操作后，新开一个 cmd 命令行窗口，然后 执行 flutter doctor 检查，此时可以看到 Android toolchain 一项前面的绿钩和 Connect device（4 available），默认只有浏览器设备和桌面设备（如Chrome、Edge 和 Windows）：</p>
+<ul>
+<li>未启动并连接逍遥模拟器</li>
+</ul>
+<img src="20240111144024.png">
+
+<ul>
+<li>启动并连接逍遥模拟器</li>
+</ul>
+<img src="20240111143848.png">
+
+<p>在 VS Code 中运行项目，等待安装前面 android-sdk 协议所确认的项目，安装完成就会连接到“逍遥模拟器”运行App。</p>
+<blockquote>
+<p>如果安装完成后长时间不能连接到“逍遥模拟器”，可以停止并重新运行项目。首次运行需要花一点时间，后面再次运行就快了。</p>
+</blockquote>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/flutter/">flutter</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

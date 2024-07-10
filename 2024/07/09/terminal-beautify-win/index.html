@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>终端美化之 Windows 篇 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="终端美化">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="终端美化之 Windows 篇"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>终端美化之 Windows 篇</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/07/09/terminal-beautify-win/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-07-09T13:54:49.000Z">
+          2024-07-09
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="安装-Windows-Terminal"><a href="#安装-Windows-Terminal" class="headerlink" title="安装 Windows Terminal"></a>安装 Windows Terminal</h2><p>Windows 终端程序是一款新式、快速、高效、强大且高效的终端应用程序，适用于命令行工具和命令提示符，PowerShell 和 WSL 等 Shell 用户。可以通过配置美化样式。打开 Windows 应用商城，安装 <a target="_blank" rel="noopener" href="https://www.microsoft.com/store/productId/9N0DX20HK701?ocid=pdpshare">Windows Terminal</a>。</p>
+<span id="more"></span>
+
+<h2 id="安装-oh-my-posh"><a href="#安装-oh-my-posh" class="headerlink" title="安装 oh-my-posh"></a>安装 oh-my-posh</h2><p> <a target="_blank" rel="noopener" href="https://apps.microsoft.com/store/detail/XP8K0HKJFRXGCK?ocid=pdpshare">oh-my-posh</a> 是一个让你的命令行提示更美观的工具。oh-my-posh 广泛支持Windows、macOS、Linux等平台。安装好 oh-my-posh 后，会在安装目录下找到下面的文件和目录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文件目录结构和官网描述有些出入</span></span><br><span class="line">.</span><br><span class="line">└─oh-my-posh</span><br><span class="line">  ├─bin</span><br><span class="line">  │ └─oh-my-posh.exe</span><br><span class="line">  └─themes</span><br><span class="line">    └─M365Princess.omp.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- `oh-my-posh` - Windows可执行文件或目录</span><br><span class="line">- `themes` - 主题目录</span><br><span class="line"></span><br><span class="line">## 安装主题</span><br><span class="line"></span><br><span class="line">下载 oh-my-posh 主题，下载成功后的主题文件位于：`C:\Users\&lt;your_name&gt;\AppData\Local\Programs\oh-my-posh\themes`。</span><br><span class="line"></span><br><span class="line">```powershell</span><br><span class="line">Get-PoshThemes</span><br></pre></td></tr></table></figure>
+
+<p>创建&#x2F;编辑PowerShell配置文件指定主题。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">notepad <span class="variable">$PROFILE</span></span><br><span class="line"><span class="comment"># 当上述命令出现错误时，请确保先创建配置文件</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$PROFILE</span> <span class="literal">-Type</span> File <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+
+<p>在打开的文件中添加如下内容：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置你喜欢的主题，如：M365Princess.omp.json</span></span><br><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> init pwsh <span class="literal">--config</span> <span class="string">&#x27;C:/Users/Posh/M365Princess.omp.json&#x27;</span> | <span class="built_in">Invoke-Expression</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="安装字体"><a href="#安装字体" class="headerlink" title="安装字体"></a>安装字体</h2><p>oh-my-posh 这设计为使用 Nerd 字体，为了图标的正常显示，还需要安装 Nerd 字体，并配置终端以使用它。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">oh</span><span class="literal">-my-posh</span> font install</span><br><span class="line"><span class="comment"># 根据提示先择喜欢的 Nerd 字体，博主选择的是 Meslo 字体</span></span><br></pre></td></tr></table></figure>
+
+<p>安装好 Nerd 字体后，修改 Windows 终端设置（默认快捷方式：<code>CTRL + SHIFT + ,</code>）。在<code>settings.json</code>文件中设置默认字体：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;profiles&quot;</span><span class="punctuation">:</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;defaults&quot;</span><span class="punctuation">:</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;font&quot;</span><span class="punctuation">:</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;face&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MesloLGM Nerd Font&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 Visual Studio Code 时，还需要配置集成终端以使用 Nerd 字体。这可以通过更改终端设置中的值来完成（默认快捷方式：<code>CTRL + ,</code>）。选择<code>Users</code>，搜索<code>Integrated: Font Family</code>。</p>
+<p>如果使用的是基于 JSON 的设置，则需要更新该值。书字体的例子：<code>terminal.integrated.fontFamilyMesloLGM Nerd Font</code>。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;terminal.integrated.fontFamily&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MesloLGM Nerd Font&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="显示文件和文件夹图标"><a href="#显示文件和文件夹图标" class="headerlink" title="显示文件和文件夹图标"></a>显示文件和文件夹图标</h2><p><a target="_blank" rel="noopener" href="https://github.com/devblackops/Terminal-Icons">Terminal-Icons</a> 是一个 PowerShell 模块，它会添加在 Windows 终端中显示文件或文件夹时可能缺少的文件和文件夹图标，并基于名称或扩展名查找相应的图标。 它尝试将图标用于已知文件&#x2F;文件夹，但如果找不到此内容，则会回滚到通用文件或文件夹图标。</p>
+<p>若要使用 PowerShell 安装 Terminal-Icons，请使用以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> <span class="literal">-Name</span> Terminal<span class="literal">-Icons</span> <span class="literal">-Repository</span> PSGallery</span><br></pre></td></tr></table></figure>
+
+<p>编辑<code>$profile</code>，添加以下内容：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> <span class="literal">-Name</span> Terminal<span class="literal">-Icons</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/终端美化/">终端美化</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

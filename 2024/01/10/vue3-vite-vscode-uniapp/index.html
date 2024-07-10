@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vue3/Vite 创建 uni-app 工程及相关配置 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="uni-app,vite">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Vue3/Vite 创建 uni-app 工程及相关配置"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Vue3/Vite 创建 uni-app 工程及相关配置</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/01/10/vue3-vite-vscode-uniapp/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-01-10T23:36:18.000Z">
+          2024-01-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <blockquote>
+<p><code>uni-app</code>是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序等多个平台。</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><h3 id="创建以-Javascript-开发的工程"><a href="#创建以-Javascript-开发的工程" class="headerlink" title="创建以 Javascript 开发的工程"></a>创建以 Javascript 开发的工程</h3><ul>
+<li>使用正式版</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx degit dcloudio/uni-preset-vue<span class="comment">#vite my-vue3-project</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用开发版</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx degit dcloudio/uni-preset-vue<span class="comment">#vite-alpha my-vue3-project</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建以Typescript-开发的工程"><a href="#创建以Typescript-开发的工程" class="headerlink" title="创建以Typescript 开发的工程"></a>创建以Typescript 开发的工程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx degit dcloudio/uni-preset-vue<span class="comment">#vite-ts my-vue3-project</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-sass-预处理器"><a href="#添加-sass-预处理器" class="headerlink" title="添加 sass 预处理器"></a>添加 sass 预处理器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm add sass -D</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-eslint"><a href="#配置-eslint" class="headerlink" title="配置 eslint"></a>配置 eslint</h2><h3 id="安装-ESLint"><a href="#安装-ESLint" class="headerlink" title="安装 ESLint"></a>安装 ESLint</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm add eslint -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化-ESLint-配置"><a href="#初始化-ESLint-配置" class="headerlink" title="初始化 ESLint 配置"></a>初始化 ESLint 配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm create @eslint/config</span><br></pre></td></tr></table></figure>
+
+<p>使用 ESLint 做什么，我选择第三个</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">? How would you like to use ESLint? ...</span><br><span class="line">  To check syntax only  // 仅检查语法</span><br><span class="line">  To check syntax and find problems  // 检查语法并发现问题</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">To check syntax, find problems, and enforce code style // 检查语法、发现问题并强制执行代码样式</span></span><br></pre></td></tr></table></figure>
+
+<p>在哪种项目模块规范中使用，我选择第一个</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">? What type of modules does your project use? ...</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">JavaScript modules (import/export)</span></span><br><span class="line">  CommonJS (require/exports)</span><br><span class="line">  None of these</span><br></pre></td></tr></table></figure>
+
+<p>在哪个框架中使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">? Which framework does your project use? ...</span><br><span class="line">  React</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Vue.js</span></span><br><span class="line">  None of these</span><br></pre></td></tr></table></figure>
+
+<p>是否使用 Typescript 和代码在哪里运行，我选择了使用 Typescript 和两个环境都选择</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">√ Does your project use TypeScript? · No / **Yes**</span><br><span class="line">√ Where does your code run? · browser, node</span><br></pre></td></tr></table></figure>
+
+<p>希望如何定义项目的样式，这里看实际需要，因为后面还要配置 Prettier，我选择了第二个</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">√ How would you like to define a style for your project? …</span><br><span class="line">  Use a popular style guide</span><br><span class="line">❯ Answer questions about your style</span><br><span class="line"><span class="meta prompt_">  #</span><span class="language-bash"><span class="comment"># next</span></span></span><br><span class="line">√ How would you like to define a style for your project? · prompt</span><br></pre></td></tr></table></figure>
+
+<p>想用什么格式的配置文件，我选了 Javascript</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">? What format do you want your config file to be in? ...</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">JavaScript</span></span><br><span class="line">  YAML</span><br><span class="line">  JSON</span><br></pre></td></tr></table></figure>
+
+<p>选择缩进风格，看实际需要，我选择了 Tabs</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">? What style of indentation do you use? ...</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Tabs</span></span><br><span class="line">  Spaces</span><br></pre></td></tr></table></figure>
+
+<p>字符串使用双引号还是单引号，看实际需要，我选了单引号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">? What quotes do you use for strings? ...</span><br><span class="line">  Double</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Single</span></span><br></pre></td></tr></table></figure>
+
+<p>使用哪种结束符，Windows 是 CRLF，Unix 是 LF，<em>我这里选择了默认，因为后面在<code>.eslintrc.js</code>改成了不限制，即在 类 Unix 平台和 Windows 平台都不做警示</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">? What line endings do you use? ...</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">Unix</span></span><br><span class="line">  Windows</span><br></pre></td></tr></table></figure>
+
+<p>是否使用分号，我选择了 No</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? Do you require semicolons? » No / Yes</span><br></pre></td></tr></table></figure>
+
+<p>接下来会提示需要安装哪些依赖，以及是否立即安装，我选择了 Yes</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@typescript-eslint/eslint-plugin@latest eslint-plugin-vue@latest @typescript-eslint/parser@latest</span><br><span class="line">? Would you like to install them now? » No / Yes</span><br></pre></td></tr></table></figure>
+
+<p>选择包管理工具，看实际需要，我这里选择了 pnpm</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">? Which package manager do you want to use? ...</span><br><span class="line">  npm</span><br><span class="line">  yarn</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">pnpm</span> </span><br></pre></td></tr></table></figure>
+
+<p>随后安装完依赖就会在项目的跟目录下生成<code>.eslintrc.js</code>文件，根据提示，我把后缀改成了<code>.cjs</code>，并且 eslint 已经生效了（如果不生效，建议重启 VS Code）</p>
+<p>根据实际需要，可以新增一个 ESLint 的忽略文件<code>.eslintignore</code>，并根据实际需要配置需要忽略的目录或文件</p>
+<h3 id="VSCode-添加-ESLint-插件"><a href="#VSCode-添加-ESLint-插件" class="headerlink" title="VSCode 添加 ESLint 插件"></a>VSCode 添加 ESLint 插件</h3><img src="1704950918532.png">
+
+<h3 id="VSCode-全局配置"><a href="#VSCode-全局配置" class="headerlink" title="VSCode 全局配置"></a>VSCode 全局配置</h3><p>关闭默认的保存并格式，开启自动格式化修复</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;editor.codeActionsOnSave&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;source.fixAll&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Prettier"><a href="#配置-Prettier" class="headerlink" title="配置 Prettier"></a>配置 Prettier</h2><h3 id="安装-Prettier"><a href="#安装-Prettier" class="headerlink" title="安装 Prettier"></a>安装 Prettier</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm add prettier -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-ESLint-与-Prettier-结合使用的依赖"><a href="#安装-ESLint-与-Prettier-结合使用的依赖" class="headerlink" title="安装 ESLint 与 Prettier 结合使用的依赖"></a>安装 ESLint 与 Prettier 结合使用的依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm i eslint-config-prettier eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-Prettier-1"><a href="#配置-Prettier-1" class="headerlink" title="配置 Prettier"></a>配置 Prettier</h3><p>根据实际需要在根目录下添加<code>.prettierrc.js</code>或<code>.prettierrc.cjs</code>，并进行相关配置，我这里只是几个规则，就配置在<code>.eslintrc.cjs</code>里了，如下所示</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .exlintrc.cjs</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// ... 省略 ...</span></span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;prettier/prettier&#x27;</span>: [</span><br><span class="line">      <span class="string">&#x27;warn&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">singleQuote</span>: <span class="literal">true</span>, <span class="comment">// 单引号</span></span><br><span class="line">        <span class="attr">semi</span>: <span class="literal">false</span>, <span class="comment">// 无分号</span></span><br><span class="line">        <span class="attr">printWidth</span>: <span class="number">80</span>, <span class="comment">// 每行宽度至多80字符</span></span><br><span class="line">        <span class="attr">trailingComma</span>: <span class="string">&#x27;none&#x27;</span>, <span class="comment">// 不加对象|数组最后逗号</span></span><br><span class="line">        <span class="attr">endOfLine</span>: <span class="string">&#x27;auto&#x27;</span> <span class="comment">// 换行结束不限制（win mac 不一致）</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;vue/multi-word-component-names&#x27;</span>: [</span><br><span class="line">      <span class="string">&#x27;warn&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">ignores</span>: [<span class="string">&#x27;index&#x27;</span>] <span class="comment">// vue组件名称多单词组成（忽略index.vue）</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;vue/no-setup-props-destructure&#x27;</span>: [<span class="string">&#x27;off&#x27;</span>] <span class="comment">// 关闭 props 解构的校验</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="VSCode-添加-Prettier-插件"><a href="#VSCode-添加-Prettier-插件" class="headerlink" title="VSCode 添加 Prettier 插件"></a>VSCode 添加 Prettier 插件</h3><p>VSCode 默认安装了该插件，如果没有则可以自己安装</p>
+<img src="1704951148666.png">
+
+<h2 id="配置-Stylelint"><a href="#配置-Stylelint" class="headerlink" title="配置 Stylelint"></a>配置 Stylelint</h2><blockquote>
+<p>Stylelint，一个强大的 CSS Lint工具，可以帮助你避免语法错误和同意代码风格。</p>
+</blockquote>
+<h3 id="初始化-Stylelint，在根目录下生成-stylelintrc-json文件"><a href="#初始化-Stylelint，在根目录下生成-stylelintrc-json文件" class="headerlink" title="初始化 Stylelint，在根目录下生成 .stylelintrc.json文件"></a>初始化 Stylelint，在根目录下生成 <code>.stylelintrc.json</code>文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm create stylelint</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-Stylelint-格式化规则，根据实际需要添加其他规则"><a href="#添加-Stylelint-格式化规则，根据实际需要添加其他规则" class="headerlink" title="添加 Stylelint 格式化规则，根据实际需要添加其他规则"></a>添加 Stylelint 格式化规则，根据实际需要添加其他规则</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm i stylelint stylelint-config-standard stylelint-config-standard-scss -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改项目根目录下的-stylelintrc-json"><a href="#修改项目根目录下的-stylelintrc-json" class="headerlink" title="修改项目根目录下的 .stylelintrc.json"></a>修改项目根目录下的 <code>.stylelintrc.json</code></h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">  <span class="attr">&quot;extends&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;stylelint-config-standard&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;stylelint-config-standard-scss&quot;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="VSCode-安装-Stylelint-插件"><a href="#VSCode-安装-Stylelint-插件" class="headerlink" title="VSCode 安装 Stylelint 插件"></a>VSCode 安装 Stylelint 插件</h3><img src="1704951192641.png">
+
+<h3 id="配置-Stylelint-1"><a href="#配置-Stylelint-1" class="headerlink" title="配置 Stylelint"></a>配置 Stylelint</h3><p>可以根据实际需要在 VSCode 全局配置文件 <code>settings.json</code> 或 为单独项目进行配置，我这里是为单独项目进行配置，修改项目根目录下的文件（如果不存在则自行添加）：<code>./.vscode/settings.json</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;css.validate&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;less.validate&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scss.validate&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;stylelint.validate&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;css&quot;</span><span class="punctuation">,</span> <span class="string">&quot;scss&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>说明：前三行是关闭 vscode 的默认校验，最后一行是开启 styelint 校验 <code>css</code>和 <code>scss</code> 样式文件，这些配置在 Stylelint 插件说明里就有，其他配置可以参考插件说明</p>
+<h2 id="配置-huskey"><a href="#配置-huskey" class="headerlink" title="配置 huskey"></a>配置 huskey</h2><blockquote>
+<p>husky 是一个 git hooks 工具  ( git的钩子工具，可以在特定时机执行特定的命令 )</p>
+<p>使用介绍：<a target="_blank" rel="noopener" href="https://typicode.github.io/husky/">🐶 husky | 🐶 husky (typicode.github.io)</a></p>
+</blockquote>
+<h3 id="初始化-git"><a href="#初始化-git" class="headerlink" title="初始化 git"></a>初始化 git</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h3 id="初始化-huskey"><a href="#初始化-huskey" class="headerlink" title="初始化 huskey"></a>初始化 huskey</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm dlx husky-init &amp;&amp; pnpm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-huskey-pre-commit-文件"><a href="#修改-huskey-pre-commit-文件" class="headerlink" title="修改 .huskey&#x2F;pre-commit 文件"></a>修改 .huskey&#x2F;pre-commit 文件</h3><blockquote>
+<p>默认会执行<strong>全量</strong>检查，所以需要配合后面的 <code>lint-staged</code> 使用</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm lint</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-lint-staged"><a href="#配置-lint-staged" class="headerlink" title="配置 lint-staged"></a>配置 lint-staged</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm i lint-staged -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-package-json"><a href="#配置-package-json" class="headerlink" title="配置 package.json"></a>配置 package.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// ... 省略 ...</span></span><br><span class="line">  <span class="attr">&quot;lint-staged&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;*.&#123;js,ts,vue&#125;&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;eslint --fix&quot;</span></span><br><span class="line">    <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;*.&#123;css,scss&#125;&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;stylelint --fix&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// ... 省略 ...</span></span><br><span class="line">    <span class="attr">&quot;lint-staged&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lint-staged&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-huskey-pre-commit-文件-1"><a href="#修改-huskey-pre-commit-文件-1" class="headerlink" title="修改 .huskey&#x2F;pre-commit 文件"></a>修改 .huskey&#x2F;pre-commit 文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm lint-staged</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/uni-app/">uni-app</a><a href="/tags/vite/">vite</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
