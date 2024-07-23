@@ -116,6 +116,13 @@
 
 <p>编辑<code>$profile</code>，添加以下内容：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Import-Module</span> <span class="literal">-Name</span> Terminal<span class="literal">-Icons</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="智能提示和自动补全"><a href="#智能提示和自动补全" class="headerlink" title="智能提示和自动补全"></a>智能提示和自动补全</h2><p><a target="_blank" rel="noopener" href="https://github.com/PowerShell/PSReadLine">PSReadLine</a> 是一个 PowerShell 模块。借助它可以实现语法高亮和错误提示，以及基于历史输入的智能提示和自动补全等功能，从而获得更好的终端使用体验。</p>
+<p>若要使用 PowerShell 安装 PSReadLine，请使用以下命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Install-Module</span> <span class="literal">-Name</span> PSReadLine <span class="literal">-AllowClobber</span> <span class="literal">-Force</span></span><br></pre></td></tr></table></figure>
+
+<p>编辑<code>$profile</code>文件，启用智能提示和自动补全，需添加如下内容：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Shows navigable menu of all options when hitting Tab</span></span><br><span class="line"><span class="built_in">Set-PSReadlineKeyHandler</span> <span class="literal">-Key</span> Tab <span class="literal">-Function</span> MenuComplete</span><br><span class="line"></span><br><span class="line"><span class="comment"># Autocompletion for arrow keys</span></span><br><span class="line"><span class="built_in">Set-PSReadlineKeyHandler</span> <span class="literal">-Key</span> UpArrow <span class="literal">-Function</span> HistorySearchBackward</span><br><span class="line"><span class="built_in">Set-PSReadlineKeyHandler</span> <span class="literal">-Key</span> DownArrow <span class="literal">-Function</span> HistorySearchForward</span><br><span class="line"></span><br><span class="line"><span class="comment"># auto suggestions</span></span><br><span class="line"><span class="built_in">Import-Module</span> PSReadLine</span><br><span class="line"><span class="built_in">Set-PSReadLineOption</span> <span class="literal">-PredictionSource</span> <span class="built_in">History</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
