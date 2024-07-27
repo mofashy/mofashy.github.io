@@ -87,27 +87,30 @@
   <div class="article-content">
     <div class="entry">
       
-        <h2 id="安装iTerm2"><a href="#安装iTerm2" class="headerlink" title="安装iTerm2"></a>安装iTerm2</h2><p><a target="_blank" rel="noopener" href="https://iterm2.com/">iTerm2</a> 是一个比 Mac 默认的终端更优雅的终端模拟器。直接在官网下载安装即可。</p>
-<h2 id="安装Oh-My-Posh"><a href="#安装Oh-My-Posh" class="headerlink" title="安装Oh My Posh"></a>安装Oh My Posh</h2><p><a target="_blank" rel="noopener" href="https://ohmyposh.dev/">oh-my-posh</a> 是一个与 <a target="_blank" rel="noopener" href="https://ohmyz.sh/">oh-my-zsh</a> 相似，用于让你的命令行提示更美观的工具。oh-my-posh 广泛支持Windows、macOS、Linux等平台。</p>
+        <h2 id="安装-iTerm2"><a href="#安装-iTerm2" class="headerlink" title="安装 iTerm2"></a>安装 iTerm2</h2><p><a target="_blank" rel="noopener" href="https://iterm2.com/">iTerm2</a> 是一个比 Mac 默认的终端更优雅的终端模拟器。直接在官网下载安装即可。</p>
+<h2 id="安装-Oh-My-Posh"><a href="#安装-Oh-My-Posh" class="headerlink" title="安装 Oh My Posh"></a>安装 Oh My Posh</h2><p><a target="_blank" rel="noopener" href="https://ohmyposh.dev/">oh-my-posh</a> 是一个与 <a target="_blank" rel="noopener" href="https://ohmyz.sh/">oh-my-zsh</a> 相似，用于让你的命令行提示更美观的工具。oh-my-posh 广泛支持 Windows、macOS、Linux 等平台。</p>
 <span id="more"></span>
 
-<p>官方建议使用brew安装，但受限于网络原因，以及安装过程中还需要下载Rust进行编译，因此博主选择了手动下载对应平台的<a target="_blank" rel="noopener" href="https://github.com/JanDeDobbeleer/oh-my-posh/releases">二进制文件</a>进行安装。</p>
-<p>打开终端，新建一个用于存放Oh My Posh文件的目录，命令如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一个默认隐藏的目录，其中的“.”，表示该文件或目录默认隐藏</span></span><br><span class="line"><span class="comment"># 如果不想隐藏该目录，可以使用“mkdir opt”替代</span></span><br><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line">$ <span class="built_in">mkdir</span> opt</span><br><span class="line"><span class="comment"># 新建存放Oh My Posh工具的目录</span></span><br><span class="line">$ <span class="built_in">mkdir</span> oh-my-posh</span><br><span class="line">$ <span class="built_in">cd</span> oh-my-posh</span><br><span class="line"><span class="comment"># 新建存放Oh My Posh工具主题的目录</span></span><br><span class="line">$ <span class="built_in">mkdir</span> themes</span><br></pre></td></tr></table></figure>
+<p>官方建议使用 brew 安装（想了解 <a target="_blank" rel="noopener" href="https://brew.sh/zh-cn/">brew</a> ？），但受限于网络原因，以及安装过程中还需要下载 Rust 进行编译，因此博主选择了手动下载对应平台的<a target="_blank" rel="noopener" href="https://github.com/JanDeDobbeleer/oh-my-posh/releases">二进制文件</a>（这里选择的是 Intel 芯片系列的<code>posh-darwin-amd64</code>二进制文件, 若使用苹果 M 芯片系列的请自行下载<code>posh-darwin-arm64</code>二进制文件）进行安装。</p>
+<p>打开终端，新建一个用于存放 Oh My Posh 文件的目录，命令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一个用于存放 oh-my-posh 相关文件的目录（例如：opt）</span></span><br><span class="line"><span class="comment"># 如果想创建一个默认隐藏的目录，则在前面加个“.”（例如：.opt)</span></span><br><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line">$ <span class="built_in">mkdir</span> opt</span><br><span class="line"><span class="comment"># 新建存放 Oh My Posh 工具的目录</span></span><br><span class="line">$ <span class="built_in">mkdir</span> oh-my-posh</span><br><span class="line">$ <span class="built_in">cd</span> oh-my-posh</span><br><span class="line"><span class="comment"># 新建存放 Oh My Posh 工具主题的目录</span></span><br><span class="line">$ <span class="built_in">mkdir</span> themes</span><br></pre></td></tr></table></figure>
 
 <p>将下载的二进制包移动到上面创建好的目录下，命令如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mv</span> ~/Downloads/posh-darwin-amd64 ~/opt/oh-my-posh/</span><br><span class="line">$ <span class="built_in">cd</span> ~/opt/oh-my-posh</span><br><span class="line"><span class="comment"># 给下载的二进制文件添加可执行权限</span></span><br><span class="line">$ <span class="built_in">chmod</span> +x oh-my-posh</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 移动文件到创建好 oh-my-posh 目录下</span></span><br><span class="line">$ <span class="built_in">mv</span> ~/Downloads/posh-darwin-amd64 ~/opt/oh-my-posh/</span><br><span class="line">$ <span class="built_in">cd</span> ~/opt/oh-my-posh</span><br><span class="line"><span class="comment"># 给下载的二进制文件添加可执行权限</span></span><br><span class="line">$ <span class="built_in">chmod</span> +x posh-darwin-amd64</span><br></pre></td></tr></table></figure>
 
-<p>挑选喜欢的主题并下载，然后将下载好的JSON文件移动到上面创建好的主题目录下，命令如下：</p>
+<p>创建符号链接（可以方便终端直接执行 oh-my-posh 命令），命令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -s ~/opt/oh-my-posh/posh-darwin-amd64 /usr/local/bin/oh-my-posh</span><br><span class="line"><span class="comment"># 根据提示输入管理员密码</span></span><br></pre></td></tr></table></figure>
+
+<p>挑选喜欢的主题并下载，然后将下载好的 JSON 文件移动到上面创建好的主题目录下，命令如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mv</span> ~/Downloads/M365Princess.omp.json ~/opt/oh-my-posh/themes/</span><br></pre></td></tr></table></figure>
 
-<p>编辑<code>.zshrc</code>文件，如果用的是<code>bash</code>，则编辑<code>.bash_profile</code>，命令如下：</p>
+<p>编辑<code>.zshrc</code>文件，命令如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim ~/.zshrc</span><br></pre></td></tr></table></figure>
 
-<p>在vim插入模式下，在末尾插入如下内容：</p>
+<p>在 vim 插入模式下，在末尾插入如下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(oh-my-posh init zsh --config ~/opt/oh-my-posh/themes/M365Princess.omp.json)</span>&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>重新打开一个终端窗口或输入如下命令使之生效。</p>
+<p>重新打开一个终端窗口或输入如下命令使之生效，然后根据提示在<code>设置</code> &gt; <code>隐私和安全性</code>中允许 oh-my-posh 执行，同时根据提示允许 oh-my-posh 在终端中执行。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 完整目录结构：</span></span><br><span class="line">.</span><br><span class="line">└─oh-my-posh</span><br><span class="line">  ├─posh-darwin-amd64</span><br><span class="line">  └─themes</span><br><span class="line">    └─M365Princess.omp.json</span><br></pre></td></tr></table></figure>
@@ -116,7 +119,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ oh-my-posh font install</span><br></pre></td></tr></table></figure>
 
 <h2 id="安装zsh插件"><a href="#安装zsh插件" class="headerlink" title="安装zsh插件"></a>安装zsh插件</h2><p>网上很多教程都是先安装<code>oh-my-zsh</code>，然后使用<code>oh-my-zsh</code>的插件管理安装插件。博主使用的是<code>oh-my-posh</code>，所以需要手动安装<code>zsh</code>插件。</p>
-<p>Mac 从10.15开始默认的 shell 改成了zsh，如果是以前的系统版本则需要把默认的 shell 改成 zsh。</p>
+<p>Mac 从 10.15 开始默认的 shell 改成了 zsh，如果是以前的系统版本则需要把默认的 shell 改成 zsh。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure>
 
 <p><code>zsh</code>拥有许多插件，博主根据自己的情况选择安装如下两个插件：</p>
@@ -140,15 +143,15 @@
 <p>安装好后，添加如下内容到<code>.zshrc</code>以激活插件：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;source <span class="variable">$&#123;(q-)PWD&#125;</span>/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot;</span> &gt;&gt; <span class="variable">$&#123;ZDOTDIR:-<span class="variable">$HOME</span>&#125;</span>/.zshrc</span><br></pre></td></tr></table></figure>
 
-<h3 id="更优雅的ls"><a href="#更优雅的ls" class="headerlink" title="更优雅的ls"></a>更优雅的ls</h3><p><a target="_blank" rel="noopener" href="https://github.com/lsd-rs/lsd">lsd</a> 是对 GNU <code>ls</code>命令的重写，具有列标题、各种项目的颜色、字体和图标支持等附加功能。</p>
+<h3 id="更优雅的-ls"><a href="#更优雅的-ls" class="headerlink" title="更优雅的 ls"></a>更优雅的 ls</h3><p><a target="_blank" rel="noopener" href="https://github.com/lsd-rs/lsd">lsd</a> 是对 GNU <code>ls</code>命令的重写，具有列标题、各种项目的颜色、字体和图标支持等附加功能。</p>
 <p>安装命令如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install lsd</span><br></pre></td></tr></table></figure>
 
-<p>编辑<code>.zshrc</code>或’.bash_profile’，将默认的<code>ls</code>命令绑定到<code>lsd</code>，大家也可以绑定自己喜欢的别名。</p>
+<p>编辑<code>.zshrc</code>或<code>.bash_profile</code>，将默认的<code>ls</code>命令绑定到<code>lsd</code>，大家也可以绑定自己喜欢的别名。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;alias ls=&#x27;lsd -l&#x27;&quot;</span> &gt;&gt; <span class="variable">$&#123;ZDOTDIR:-<span class="variable">$HOME</span>&#125;</span>/.zshrc</span><br></pre></td></tr></table></figure>
 
 <h2 id="VS-Code配置"><a href="#VS-Code配置" class="headerlink" title="VS Code配置"></a>VS Code配置</h2><p>如果你使用 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VS Code</a> 代码编辑器，那么你将需要配置<code>Nerd Font</code>以便更好的使用内置的终端程序。打开VS Code设置（默认快捷键：<code>⌘+,</code>，然后搜索<code>Integrated: Font Family</code>。</p>
-<p>你也可以打开VS Code设置的JSON模式进行修改，只需要更新<code>terminal.integrated.fontFamily</code>的值即可。以<code>MesloLGM Nerd Font</code>为例：</p>
+<p>你也可以打开 VS Code 设置的 JSON 模式进行修改，只需要更新<code>terminal.integrated.fontFamily</code>的值即可。以<code>MesloLGM Nerd Font</code>为例：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;terminal.integrated.fontFamily&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MesloLGM Nerd Font&quot;</span></span><br></pre></td></tr></table></figure>
 
 
