@@ -133,15 +133,15 @@
 <p>安装命令如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zsh-autosuggestions</span><br></pre></td></tr></table></figure>
 
-<p>安装好后，添加如下内容到<code>.zshrc</code>以激活插件：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;source <span class="variable">$&#123;(q-)PWD&#125;</span>/zsh-autosuggestions/zsh-autosuggestions.zsh&quot;</span> &gt;&gt; <span class="variable">$&#123;ZDOTDIR:-<span class="variable">$HOME</span>&#125;</span>/.zshrc</span><br></pre></td></tr></table></figure>
+<p>安装好后，添加如下内容到<code>.zshrc</code>末尾以激活插件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh</span><br></pre></td></tr></table></figure>
 
 <h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>在输入命令时，<code>zsh-syntax-highlighting</code>插件会对关键字进行高亮，可以让你输入的命令更加直观，同时如果输入错误的命令，也会显示为红色。</p>
 <p>安装命令如下：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
 
-<p>安装好后，添加如下内容到<code>.zshrc</code>以激活插件：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;source <span class="variable">$&#123;(q-)PWD&#125;</span>/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot;</span> &gt;&gt; <span class="variable">$&#123;ZDOTDIR:-<span class="variable">$HOME</span>&#125;</span>/.zshrc</span><br></pre></td></tr></table></figure>
+<p>安装好后，添加如下内容到<code>.zshrc</code>末尾以激活插件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</span><br></pre></td></tr></table></figure>
 
 <h3 id="更优雅的-ls"><a href="#更优雅的-ls" class="headerlink" title="更优雅的 ls"></a>更优雅的 ls</h3><p><a target="_blank" rel="noopener" href="https://github.com/lsd-rs/lsd">lsd</a> 是对 GNU <code>ls</code>命令的重写，具有列标题、各种项目的颜色、字体和图标支持等附加功能。</p>
 <p>安装命令如下：</p>
