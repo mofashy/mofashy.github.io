@@ -154,7 +154,8 @@
 <p>你也可以打开 VS Code 设置的 JSON 模式进行修改，只需要更新<code>terminal.integrated.fontFamily</code>的值即可。以<code>MesloLGM Nerd Font</code>为例：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;terminal.integrated.fontFamily&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MesloLGM Nerd Font&quot;</span></span><br></pre></td></tr></table></figure>
 
-
+<p><strong>注意</strong>：如果遇到 oh-my-posh 使用期间，在用户目录下出现了许多类似<code>omp.cache.*</code>的文件，不用担心，这只是应用程序为了加快启动速度或者提高系统性能而生成的缓存文件。之所以会出现在用户目录下只是因为您的电脑缺乏缓存目录（<code>.cache</code>），用如下命令建立缓存目录即可（同时，您可以放心的将用户目录下的<code>omp.cache.*</code>文件放入回收站或直接删除）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">mkdir</span> ~/.cache</span><br></pre></td></tr></table></figure>
       
     </div>
 
