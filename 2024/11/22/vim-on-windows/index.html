@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gVim最新版本安装和配置（Windows） | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="vim">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="gVim最新版本安装和配置（Windows）"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>gVim最新版本安装和配置（Windows）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2024/11/22/vim-on-windows/" rel="bookmark">
+        <time class="entry-date published" datetime="2024-11-22T20:41:49.000Z">
+          2024-11-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><code>Vim</code>是从<code>vi</code>发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用，和<code>Emacs</code>并列成为类Unix系统用户最喜欢的文本编辑器。</p>
+<p><code>gVim</code>是<code>Vim</code>的图形前端，它是跨平台的编辑器，基本上主流的操作系统上面都有它的对应的版本。</p>
+<span id="more"></span>
+
+<h2 id="gVim的安装"><a href="#gVim的安装" class="headerlink" title="gVim的安装"></a>gVim的安装</h2><p>官网下载地址：<a target="_blank" rel="noopener" href="https://www.vim.org/download.php">gVim</a>，根据操作系统选择32位（当前为：gvim_9.1.0000_x86.exe）或64位版本（当前为：gvim_9.1.0000_x64.exe）。</p>
+<img src="/2024/11/22/vim-on-windows/gvim-01-01.png" class="" title="gVim download">
+
+<p>下载完后进行安装，根据需要自行选择安装的类型，这里选择了典型安装。</p>
+<img src="/2024/11/22/vim-on-windows/gvim-01-02.png" class="" title="gVim install type">
+
+<p>安装路径默认即可，也可以根据自身需要选择其他位置。除此外，其余步骤默认即可。</p>
+<img src="/2024/11/22/vim-on-windows/gvim-01-03.png" class="" title="gVim install destination">
+
+<h2 id="gVim的配置"><a href="#gVim的配置" class="headerlink" title="gVim的配置"></a>gVim的配置</h2><p>默认的<code>gVim</code>编辑器界面比较简陋，我们可以根据自己需要进行配置。</p>
+<p>在上一步骤中，我们选择将<code>gVim</code>默认安装在C盘位置，根据安装盘符的不同会存在两种情况：</p>
+<ol>
+<li>如果选择默认安装在C盘，则安装目录下有两个文件：<ul>
+<li><code>vim91</code>: vim软件本体目录</li>
+<li><code>_vimrc</code>: vim配置文件（该文件无法进行编辑保存）</li>
+</ul>
+</li>
+<li>如果选择安装到其他盘符，则安装目录下有三个文件：<ul>
+<li><code>vim91</code>: vim软件本体目录</li>
+<li><code>vimfiles</code>: 存放vim插件、颜色、字体等配置</li>
+<li><code>_vimrc</code>: vim配置文件（可以编辑保存）</li>
+</ul>
+</li>
+</ol>
+<p>对于第一种情况，安装程序会自动在用户目录（即：<code>C:\Users\[用户名]\</code>）下创建<code>vimfiles</code>文件夹。因此，要想添加个人的配置则可以复制一份这个文件到用户目录下（<code>C:\Users\[用户名]\_vimrc</code>）然后进行编辑。</p>
+<p>以下是我的基本配置：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span>                       <span class="comment">&quot; 自动语法高亮</span></span><br><span class="line"><span class="keyword">set</span> <span class="keyword">number</span>                      <span class="comment">&quot; 显示行号</span></span><br><span class="line"><span class="keyword">set</span> relativenumber              <span class="comment">&quot; 显示相对行号</span></span><br><span class="line"><span class="keyword">set</span> smartindent                 <span class="comment">&quot; 智能自动缩进</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span>                <span class="comment">&quot; 设置自动缩进时，每一级缩进4个空格的宽度</span></span><br><span class="line"><span class="keyword">set</span> tagstop=<span class="number">4</span>                   <span class="comment">&quot; 设定tab长度为4个空格</span></span><br><span class="line"><span class="keyword">set</span> expandtab                   <span class="comment">&quot; 将tab转换为等量的空格</span></span><br><span class="line"><span class="keyword">set</span> softtabstop=<span class="number">4</span>               <span class="comment">&quot; 按退格键时一次删除4个空格</span></span><br><span class="line"><span class="keyword">set</span> nobackup                    <span class="comment">&quot; 覆盖文件时不备份</span></span><br><span class="line"><span class="keyword">set</span> noundofile                  <span class="comment">&quot; 设置不需要生成记录撤销操作的文件</span></span><br><span class="line"><span class="keyword">set</span> cursorline                  <span class="comment">&quot; 突出显示当前行</span></span><br><span class="line"><span class="keyword">set</span> guifont=Cascadia_Mono:h12   <span class="comment">&quot; 设置字体</span></span><br></pre></td></tr></table></figure>
+
+<p><code>gVim</code>默认附带了多种主题配色方案（可以通过<code>编辑</code>&gt;<code>配色方案</code>进行查看），如果这些主题配色都不是你喜欢的，则可以自行下载其他第三方配色方案，也可以选择官网推荐的<a target="_blank" rel="noopener" href="https://www.vim.org/scripts/script.php?script_id=2340">molokai: A port of the monokai scheme for TextMate</a></p>
+<img src="/2024/11/22/vim-on-windows/gvim-02-01.png" class="" title="molokai colorscheme">
+
+<p>把下载好的文件<code>molokai.vim</code>移动到<code>vimfiles</code>&gt;<code>colors</code>目录下。</p>
+<img src="/2024/11/22/vim-on-windows/gvim-02-02.png" class="" title="molokai destination">
+
+<p>重新编辑<code>_vimrc</code>文件，添加如下内容：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">colorscheme</span> molokai</span><br></pre></td></tr></table></figure>
+
+<p>然后通过<code>:w</code>保存和<code>source %</code>重新加载配置，或者保存后重新打开软件。</p>
+<h2 id="使用插件管理器"><a href="#使用插件管理器" class="headerlink" title="使用插件管理器"></a>使用插件管理器</h2><p>每次都要自己去下载添加插件很不方便，因此推荐使用插件管理器，这里选择的是<code>Vim-plug</code>。</p>
+<p>首先需要在<code>vimfiles</code>下创建<code>autoload</code>目录，让后下载<code>plug.vim</code>并添加到创建好的<code>autoload</code>目录下。GitHub访问不易，贴一个<code>Vim-plug</code>的镜像地址：<a target="_blank" rel="noopener" href="https://gitee.com/vim-plugin-agent/vim-plug.git">Vim-plug</a></p>
+<img src="/2024/11/22/vim-on-windows/gvim-03-01.png" class="" title="vim-plug installed">
+
+<p>编辑<code>_vimrc</code>文件，添加如下内容启用插件管理器：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 插件管理 vim-plug</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(`~\vimfiles\plugin`)</span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br></pre></td></tr></table></figure>
+
+<p><code>Vim</code>里一个好看的状态栏是非常加分的。使用最广的状态栏插件莫过于<code>vim-airline</code>。然而对于我来说，<code>vim-airline</code>过于庞大了，因此挑选更加轻量的<a target="_blank" rel="noopener" href="https://vimawesome.com/plugin/lightline-vim">lightline</a>插件。</p>
+<p>打开<code>_vimrc</code>文件，在包管理函数中（即<code>call plug#begin()</code>和<code>call plug#end()</code>之间）添加如下内容：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 把这句加到plug函数里</span></span><br><span class="line">Plug <span class="string">&#x27;itchyny/lightline.vim&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; 把这两句添加到plug函数外其他地方</span></span><br><span class="line"><span class="keyword">set</span> laststatus=<span class="number">2</span>                                    <span class="comment">&quot; 显示状态栏，默认不显示</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">g:lightline</span> = &#123; <span class="string">&#x27;colorscheme&#x27;</span>: <span class="string">&#x27;molokai&#x27;</span>, &#125;     <span class="comment">&quot; 状态栏配色方案</span></span><br><span class="line"><span class="keyword">set</span> noshowmode                                      <span class="comment">&quot; 关闭当前状态显示，lightline插件已显示当前状态</span></span><br></pre></td></tr></table></figure>
+
+<p>注意<code>lightline</code>插件的配色方案跟前面设置的编辑器配色方案是不一样的，因此两个都需要设置。</p>
+<h2 id="配置进阶"><a href="#配置进阶" class="headerlink" title="配置进阶"></a>配置进阶</h2><p>在常用的IDE软件中，新建代码文件时会自动在前几行插入文件名、作者、创建时间等信息，可以通过在<code>_vimrc</code>中添加自定义函数实现此功能。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 当创建新的C、CPP、SH脚本文件时自动调用SetTitle函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">autocmd</span> BufNewFile *.[ch],*.cpp,*.<span class="keyword">sh</span> exec <span class="string">&quot;:call SetTitle()&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&quot; SetTitle函数定义</span></span><br><span class="line">func SetTitle()</span><br><span class="line">    <span class="keyword">call</span> <span class="built_in">setline</span>(<span class="number">1</span>, <span class="string">&quot;/*************************************************&quot;</span>)</span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">1</span>, <span class="string">&quot; * @File Name: &quot;</span>.<span class="built_in">expand</span>(<span class="comment">&quot;%))</span></span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">2</span>, <span class="string">&quot; * @Description: &quot;</span>)</span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">3</span>, <span class="string">&quot; * Author: mofashy&quot;</span>)</span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">4</span>, <span class="string">&quot; * Created Time: &quot;</span>.<span class="built_in">strftime</span>(<span class="string">&quot;%c&quot;</span>))</span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">5</span>, <span class="comment">&quot; **************************************************/)</span></span><br><span class="line">    <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">6</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">&quot; 根据文件类型插入不同的代码</span></span><br><span class="line">    <span class="keyword">if</span> &amp;<span class="keyword">filetype</span> == <span class="string">&#x27;c&#x27;</span> || &amp;<span class="keyword">filetype</span> == <span class="string">&#x27;h&#x27;</span></span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">7</span>, <span class="string">&quot;#include &lt;stdio.h&gt;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">8</span>, <span class="string">&quot;#include &lt;stdlib.h&gt;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">9</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">10</span>, <span class="string">&quot;int main(void)&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">11</span>, <span class="string">&quot;&#123;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">12</span>, <span class="string">&quot;   return 0;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">13</span>, <span class="string">&quot;&#125;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">14</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">elseif</span> &amp;<span class="keyword">filetype</span> == <span class="string">&#x27;cpp&#x27;</span></span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">7</span>, <span class="string">&quot;#include &lt;iostream&gt;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">8</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">9</span>, <span class="string">&quot;using namespace std;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">10</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">11</span>, <span class="string">&quot;int main(void)&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">12</span>, <span class="string">&quot;&#123;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">13</span>, <span class="string">&quot;   return 0;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">14</span>, <span class="string">&quot;&#125;&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">15</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">elseif</span> &amp;<span class="keyword">filetype</span> == <span class="string">&#x27;sh&#x27;</span></span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">7</span>, <span class="string">&quot;\#!/bin/bash&quot;</span>)</span><br><span class="line">        <span class="keyword">call</span> <span class="keyword">append</span>(<span class="number">8</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&quot; 新建文件后，自动定位到文件末尾</span></span><br><span class="line">    <span class="keyword">normal</span> G</span><br><span class="line">endfunc</span><br></pre></td></tr></table></figure>
+
+<img src="/2024/11/22/vim-on-windows/gvim-04-01.png" class="" title="vim auto set title">
+
+
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/vim/">vim</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2024 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
