@@ -134,7 +134,7 @@
 <img src="/2024/11/22/vim-on-windows/gvim-03-01.png" class="" title="vim-plug installed">
 
 <p>编辑<code>_vimrc</code>文件，添加如下内容启用插件管理器：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 插件管理 vim-plug</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(`~\vimfiles\plugin`)</span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 插件管理 vim-plug</span></span><br><span class="line"><span class="comment">&quot; 不要使用默认的插件安装目录(`~\vimfiles\plugin`)，否则加载插件时会出现错误</span></span><br><span class="line"><span class="keyword">call</span> plug#begin(`~\vimfiles\plugged`)</span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br></pre></td></tr></table></figure>
 
 <p><code>Vim</code>里一个好看的状态栏是非常加分的。使用最广的状态栏插件莫过于<code>vim-airline</code>。然而对于我来说，<code>vim-airline</code>过于庞大了，因此挑选更加轻量的<a target="_blank" rel="noopener" href="https://vimawesome.com/plugin/lightline-vim">lightline</a>插件。</p>
 <p>打开<code>_vimrc</code>文件，在包管理函数中（即<code>call plug#begin()</code>和<code>call plug#end()</code>之间）添加如下内容：</p>
@@ -146,6 +146,61 @@
 
 <img src="/2024/11/22/vim-on-windows/gvim-04-01.png" class="" title="vim auto set title">
 
+<h2 id="其他插件介绍"><a href="#其他插件介绍" class="headerlink" title="其他插件介绍"></a>其他插件介绍</h2><blockquote>
+<p>NERDTree</p>
+</blockquote>
+<p>这是一个使用比较广泛的插件——目录树。支持在不退出vim编辑器的前提下，在文件中快速进行切换，同时能让开发人员快速掌握项目目录解构，是提升开发效率必不可少的工具。</p>
+<ol>
+<li>安装</li>
+</ol>
+<p>使用plug-vim插件管理工具进行安装</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">call</span> plug#begin()</span><br><span class="line">Plug <span class="string">&#x27;preservim/nerdtree&#x27;</span></span><br><span class="line"><span class="keyword">call</span> plug#end()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<p>NERDTree默认无需配置即可直接使用，也可以参考文档更改部分按键映射。最常见的配置如下所示：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&quot; 使用Ctrl+n快速打开目录树</span></span><br><span class="line"><span class="keyword">nnoremap</span> <span class="symbol">&lt;C-n&gt;</span> :NERDTreeToggle<span class="symbol">&lt;CR&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>auto-pairs</p>
+</blockquote>
+<p>这个插件的功能简单而实用：在输入&#x2F;删除左括号&#x2F;左引号时，能自动补上&#x2F;删除右括号&#x2F;右引号。</p>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug <span class="string">&#x27;jiangmiao/auto-pairs&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用</li>
+</ol>
+<p>开箱即用，不需要过多的配置。</p>
+<blockquote>
+<p>NerdCommenter</p>
+</blockquote>
+<p>NerdCommenter和vim的visual模式结合可以快速的注释&#x2F;取消注释多行代码，同时在行尾追加注释并自动进入insert模式可以方便的进行行内注释。</p>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug <span class="string">&#x27;preservim/nerdcommenter&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/preservim/nerdcommenter">https://github.com/preservim/nerdcommenter</a></p>
+<blockquote>
+<p>Rainbow</p>
+</blockquote>
+<p>这个插件可以为不同层级的括号提供不同颜色来进行区分，可以帮助您更好的阅读代码。</p>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plug <span class="string">&#x27;luochen1990/rainbow&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">g:rainbow_active</span> = <span class="number">1</span> <span class="comment">&quot; 如果想以后通过:RainbowToggle来启用它，请设置为0</span></span><br></pre></td></tr></table></figure>
 
 
       
