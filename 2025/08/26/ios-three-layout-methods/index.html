@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>layoutSubviews、layoutIfNeeded和setNeedsLayout的对比 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="layoutSubviews、layoutIfNeeded和setNeedsLayout的对比"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>layoutSubviews、layoutIfNeeded和setNeedsLayout的对比</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/08/26/ios-three-layout-methods/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-08-26T21:52:46.000Z">
+          2025-08-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在iOS开发中，layoutSubviews、layoutIfNeeded和setNeedsLayout是三个与视图布局相关的重要方法，它们的区别和联系如下：</p>
+<span id="more"></span>
+
+<h3 id="三者的特点"><a href="#三者的特点" class="headerlink" title="三者的特点"></a>三者的特点</h3><br>
+
+<h3 id="1-layoutSubviews"><a href="#1-layoutSubviews" class="headerlink" title="1. layoutSubviews"></a>1. layoutSubviews</h3><ul>
+<li><strong>作用</strong>：负责执行实际的布局计算，调整子视图的位置和大小。</li>
+<li><strong>调用时机</strong>：<ul>
+<li>视图初始化时（initWithFrame且rect不为CGRectZero）。</li>
+<li>添加子视图（addSubviews）。</li>
+<li>视图的frame或bounds发生变化。</li>
+<li>滚动UIScrollView或旋转屏幕。</li>
+<li>调用setNeedsLayout或layoutIfNeeded后。</li>
+</ul>
+</li>
+<li><strong>注意</strong>：<ul>
+<li>不能直接调用layoutSubviews，需通过setNeedsLayout或layoutIfNeeded触发。</li>
+<li>子类可重写以实现自定义布局逻辑。<br></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-setNeedsLayout"><a href="#2-setNeedsLayout" class="headerlink" title="2. setNeedsLayout"></a>2. setNeedsLayout</h4><ul>
+<li><strong>作用</strong>：标记视图需要重新布局，但不会立即更新，而是将请求加入队列，等待下一个布局周期处理。</li>
+<li><strong>特点</strong>：<ul>
+<li>异步执行，适合合并多次布局更新以提高性能。</li>
+<li>最终触发layoutSubviews。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：当视图约束或尺寸变化后，延迟更新布局。<br></li>
+</ul>
+<h4 id="3-layoutIfNeeded"><a href="#3-layoutIfNeeded" class="headerlink" title="3. layoutIfNeeded"></a>3. layoutIfNeeded</h4><ul>
+<li><strong>作用</strong>：立即检查并执行布局更新（同步操作），若视图被标记为需要布局，则调用layoutSubviews。</li>
+<li><strong>特点</strong>：<ul>
+<li>强制立即更新布局，适合需要实时获取布局结果的场景（如动画）。</li>
+<li>若无待处理的布局请求，则直接退出。</li>
+</ul>
+</li>
+<li><strong>使用场景</strong>：在动画中同步更新约束，或需要立即刷新界面时。<br>
+<br></li>
+</ul>
+<h3 id="三者的关系"><a href="#三者的关系" class="headerlink" title="三者的关系"></a>三者的关系</h3><ul>
+<li>setNeedsLayout和layoutIfNeeded都会触发layoutSubviews，但前者延迟执行，后者立即执行。</li>
+<li>性能优化：频繁布局时优先用setNeedsLayout；需即时效果时用layoutIfNeeded。<br>
+<br></li>
+</ul>
+<h3 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h3><br>
+
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>调用方式</th>
+<th>执行时机</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layoutSubviews</td>
+<td>系统自动调用</td>
+<td>布局周期内</td>
+<td>重写以实现自定义布局逻辑</td>
+</tr>
+<tr>
+<td>setNeedsLayout</td>
+<td>手动调用</td>
+<td>下一个布局周期</td>
+<td>延迟更新布局</td>
+</tr>
+<tr>
+<td>layoutIfNeeded</td>
+<td>手动调用</td>
+<td>立即执行</td>
+<td>动画或实时布局需求</td>
+</tr>
+</tbody></table>
+<br>
+
+<p>[<em>注</em>] 更多细节可参考官方文档</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
