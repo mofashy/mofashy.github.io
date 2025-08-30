@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中的AutoLayout和Frame（四） | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS中的AutoLayout和Frame（四）"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS中的AutoLayout和Frame（四）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/08/30/ios-autolayout-and-frame-part-4/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-08-30T14:54:57.000Z">
+          2025-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>预计算布局的核心实现方法可分为以下技术要点：</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、基础原理"><a href="#一、基础原理" class="headerlink" title="一、基础原理"></a>一、基础原理</h3><ol>
+<li><p><strong>尺寸预计算</strong><br>通过<code>systemLayoutSizeFitting</code>方法获取视图的预估尺寸，结合<code>intrinsicContentSize</code>确定固有内容大小。<br>对动态文本使用<code>boundingRectWithSize</code>提前计算高度，避免布局时实时计算。</p>
+</li>
+<li><p><strong>约束预激活</strong><br>在后台线程提前创建并激活约束（需确保线程安全），主线程仅应用最终结果。<br>使用<code>NSLayoutConstraint.activate</code>批量操作减少约束更新次数。</p>
+</li>
+</ol>
+<hr>
+<h3 id="二、列表优化技术"><a href="#二、列表优化技术" class="headerlink" title="二、列表优化技术"></a>二、列表优化技术</h3><ol>
+<li><p><strong>单元格预计算</strong><br>为<code>UITableViewCell</code>或<code>UICollectionViewCell</code>实现<code>preferredLayoutAttributesFitting</code>方法，提前返回布局属性。<br>结合<code>estimatedItemSize</code>提供初始估算值，滚动时逐步修正。</p>
+</li>
+<li><p><strong>缓存机制</strong><br>以内容哈希值为Key缓存布局结果（如NSCache），内容未变化时直接复用。<br>对动态内容（如富文本）建立版本标识，仅版本变更时重新计算。</p>
+</li>
+</ol>
+<hr>
+<h3 id="三、异步处理流程"><a href="#三、异步处理流程" class="headerlink" title="三、异步处理流程"></a>三、异步处理流程</h3><ol>
+<li><p><strong>分阶段计算</strong>  </p>
+<ul>
+<li><strong>阶段1</strong>：后台线程计算文本尺寸、图片缩放比例等独立属性。  </li>
+<li><strong>阶段2</strong>：主线程整合结果并应用约束，调用<code>layoutIfNeeded</code>强制更新。</li>
+</ul>
+</li>
+<li><p><strong>优先级控制</strong><br>对非可见区域单元格使用低优先级队列（如QOS_CLASS_UTILITY），滚动停止时提升优先级。</p>
+</li>
+</ol>
+<hr>
+<h3 id="四、工具辅助"><a href="#四、工具辅助" class="headerlink" title="四、工具辅助"></a>四、工具辅助</h3><ol>
+<li><p><strong>调试手段</strong><br>通过Xcode的<strong>Debug View Hierarchy</strong>检查预计算约束是否生效。<br>使用Instruments的<strong>System Trace</strong>分析布局线程占用时间。</p>
+</li>
+<li><p><strong>混合布局策略</strong><br>对固定尺寸区域采用Frame布局，动态区域结合AutoLayout预计算，平衡性能与灵活性。</p>
+</li>
+</ol>
+<p>引用链接：<br>[1] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45371279/article/details/148089066">运行布局工具时如何进行布线资源预估? - CSDN博客</a><br>[2] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7482725346673016866">【canvas】一键自动布局:如何让流程图节点自动找到最佳位置  - 掘金开发者社区</a><br>[3] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52192405/article/details/124831143">[iOS开发]autolayout自动布局 - CSDN博客</a><br>[4] <a target="_blank" rel="noopener" href="http://haokan.baidu.com/v?pd=wisenatural&vid=8063884421268983076">超低预算爆改小岛上的家,布局能把我笑死!一顿大龙虾支配所有~ - 瞎通设计</a><br>[5] <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000041547189">一种子图布局方法的实现 - 思否开发者社区</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

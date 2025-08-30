@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中的AutoLayout和Frame（三） | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS中的AutoLayout和Frame（三）"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS中的AutoLayout和Frame（三）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/08/30/ios-autolayout-and-frame-part-3/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-08-30T14:34:41.000Z">
+          2025-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>预计算布局是一种通过提前计算视图尺寸和位置来优化性能的技术，其核心实现方法如下：</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、静态预计算（适用于固定内容）"><a href="#一、静态预计算（适用于固定内容）" class="headerlink" title="一、静态预计算（适用于固定内容）"></a>一、静态预计算（适用于固定内容）</h3><ol>
+<li><p><strong>提前计算并缓存布局结果</strong>  </p>
+<ul>
+<li>在数据加载阶段（如<code>viewDidLoad</code>）计算视图的<code>frame</code>或约束值，存储为变量备用。  </li>
+<li>示例：对动态高度的<code>UITableViewCell</code>，提前通过<code>boundingRect</code>计算文本高度并缓存。</li>
+</ul>
+</li>
+<li><p><strong>使用常量或配置文件</strong>  </p>
+<ul>
+<li>将固定尺寸（如间距、图标大小）定义为常量或从配置文件中读取，避免运行时重复计算。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、动态预计算（适用于可变内容）"><a href="#二、动态预计算（适用于可变内容）" class="headerlink" title="二、动态预计算（适用于可变内容）"></a>二、动态预计算（适用于可变内容）</h3><ol>
+<li><p><strong>后台线程计算</strong>  </p>
+<ul>
+<li>将复杂布局（如瀑布流单元格位置）放到后台线程计算，结果回调主线程更新。  </li>
+<li>示例：<code>DispatchQueue.global().async</code>中计算<code>UICollectionViewCell</code>布局。</li>
+</ul>
+</li>
+<li><p><strong>增量更新</strong>  </p>
+<ul>
+<li>对新增数据仅计算增量部分（如分页加载时预计算下一页布局）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、工具与框架支持"><a href="#三、工具与框架支持" class="headerlink" title="三、工具与框架支持"></a>三、工具与框架支持</h3><ol>
+<li><p><strong>系统级优化</strong>  </p>
+<ul>
+<li>iOS的<code>UICollectionViewLayout</code>可通过重写<code>prepare()</code>预计算所有<code>UICollectionViewLayoutAttributes</code>。  </li>
+<li>使用<code>UIStackView</code>或<code>Auto Layout</code>的<code>systemLayoutSizeFitting</code>预估算尺寸。</li>
+</ul>
+</li>
+<li><p><strong>第三方方案</strong>  </p>
+<ul>
+<li>ASDK（Texture）通过后台线程预排版和智能预加载优化列表性能。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="四、性能权衡"><a href="#四、性能权衡" class="headerlink" title="四、性能权衡"></a>四、性能权衡</h3><ul>
+<li><strong>空间换时间</strong>：缓存布局结果会增加内存占用，需平衡实时性与资源消耗。  </li>
+<li><strong>精准度控制</strong>：对实时性要求低的场景（如报表），可采用全量预计算；高实时性场景需结合增量计算。</li>
+</ul>
+<p>通过上述方法，可显著减少主线程布局计算压力，提升界面流畅度。</p>
+<p>引用链接：<br>[1] <a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_30087715/article/details/147851794">iOS瀑布流布局的实现(swift) - CSDN博客</a><br>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33060405/article/details/143897139">IOS异步渲染的原理 - CSDN博客</a><br>[3] <a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1829605250226977759&wfr=spider&for=pc">iOS视图坐标系详解:深入理解frame、bounds、center与transform - 哇哩哩瓦利</a><br>[4] <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903902802870286">iOS中的Auto Layout和Frame  - 掘金开发者社区</a><br>[5] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21455683/article/details/115698251">iOS 好用的表格预加载方法_ios tableview 下拉预加载-CSDN博客 - CSDN博客</a><br>[6] <a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1834477458084199730&wfr=spider&for=pc">iOS 8如何简化动态UITableView_CELL高度计算 - ֥ʿζϻ</a><br>[7] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34409822/article/details/86463986">预加载与智能预加载(iOS)-CSDN博客 - CSDN博客</a><br>[8] <a target="_blank" rel="noopener" href="https://www.escdns.com/article/detail/313134.html">iOS中的UITableView的重用机制与加载优化详解 - 易网</a><br>[9] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7379414160642900020">性能优化再思考:理解资源与计算的关键(计算篇)  - 掘金开发者社区</a><br>[10] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/itlover2013/p/15371669.html">iOS - fps 60 优化 - 博客园</a><br>[11] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36001279/article/details/148061331">掌握UICollectionView实现iOS瀑布流布局-CSDN博客 - CSDN博客</a><br>[12] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26763921424">唯品会背后的技术和算法 - baitailaoren2</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

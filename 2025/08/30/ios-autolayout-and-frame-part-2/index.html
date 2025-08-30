@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中的AutoLayout和Frame（二） | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS中的AutoLayout和Frame（二）"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS中的AutoLayout和Frame（二）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/08/30/ios-autolayout-and-frame-part-2/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-08-30T14:25:58.000Z">
+          2025-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在iOS开发中优化视图布局性能需从<strong>约束管理</strong>、<strong>系统机制</strong>和<strong>工具辅助</strong>三个维度综合处理，以下是具体方案：</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、约束设计优化"><a href="#一、约束设计优化" class="headerlink" title="一、约束设计优化"></a>一、约束设计优化</h3><ol>
+<li><p><strong>减少冗余约束</strong>  </p>
+<ul>
+<li>避免重复定义相同约束（如同时设置<code>leading</code>和<code>width</code>），优先使用<code>ContentHuggingPriority</code>控制弹性布局。  </li>
+<li>对固定尺寸元素（如图标）直接设置<code>width</code>&#x2F;<code>height</code>常量，而非依赖动态计算。</li>
+</ul>
+</li>
+<li><p><strong>简化约束层级</strong>  </p>
+<ul>
+<li>使用<code>UIStackView</code>替代多层嵌套约束，自动管理子视图间距和对齐。  </li>
+<li>对复杂布局拆分为多个<code>UILayoutGuide</code>，减少视图层级。</li>
+</ul>
+</li>
+<li><p><strong>动态约束优化</strong>  </p>
+<ul>
+<li>批量修改约束时，先调用<code>setNeedsUpdateConstraints</code>标记，再统一执行<code>layoutIfNeeded</code>。  </li>
+<li>优先调整约束<code>constant</code>或<code>priority</code>，而非移除后重新添加。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、系统机制利用"><a href="#二、系统机制利用" class="headerlink" title="二、系统机制利用"></a>二、系统机制利用</h3><ol>
+<li><p><strong>iOS12+特性适配</strong>  </p>
+<ul>
+<li>苹果已优化Cassowary算法，性能从指数级降至线性级，需确保最低支持版本为iOS12。  </li>
+<li>利用<code>intrinsicContentSize</code>减少对<code>systemLayoutSizeFitting</code>的调用。</li>
+</ul>
+</li>
+<li><p><strong>异步计算与缓存</strong>  </p>
+<ul>
+<li>将文本高度计算等耗时操作移至后台线程，结果缓存后主线程更新。  </li>
+<li>对列表项（如<code>UITableViewCell</code>）预计算并缓存布局结果。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、工具与调试"><a href="#三、工具与调试" class="headerlink" title="三、工具与调试"></a>三、工具与调试</h3><ol>
+<li><p><strong>性能检测工具</strong>  </p>
+<ul>
+<li>使用Xcode的<strong>Debug View Hierarchy</strong>识别冗余约束或视图层级。  </li>
+<li>通过Instruments的<strong>Core Animation</strong>检查帧率，<strong>Time Profiler</strong>定位布局耗时方法。</li>
+</ul>
+</li>
+<li><p><strong>替代方案</strong>  </p>
+<ul>
+<li>对性能敏感区域（如瀑布流）可混合使用<code>Frame</code>布局。  </li>
+<li>考虑第三方库（如FlexLayout）平衡开发效率与性能。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="四、关键总结"><a href="#四、关键总结" class="headerlink" title="四、关键总结"></a>四、关键总结</h3><ul>
+<li><strong>规则1</strong>：优先使用相对约束（如<code>leadingToTrailing</code>），避免绝对数值。  </li>
+<li><strong>规则2</strong>：动态内容通过<code>updateConstraints</code>而非<code>layoutSubviews</code>调整。  </li>
+<li><strong>规则3</strong>：列表视图启用<code>estimatedRowHeight</code>减少初始计算量。</li>
+</ul>
+<p>引用链接：<br>[1] <a target="_blank" rel="noopener" href="https://docs.pingcode.com/ask/107909.html">如何在iOS开发中优化表视图性能 - PingCode</a><br>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42356162/article/details/149662640">iOS tableViewCell性能优化秘籍-CSDN博客 - CSDN博客</a><br>[3] <a target="_blank" rel="noopener" href="https://blog.csdn.net/I_did_it/article/details/149489381">iOS第十五篇 iOS项目性能优化全面指南 - CSDN博客</a><br>[4] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_40966119/article/details/139827032">IOS性能优化方法总结 - CSDN博客</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

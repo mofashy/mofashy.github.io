@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS中的AutoLayout和Frame（五） | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS中的AutoLayout和Frame（五）"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS中的AutoLayout和Frame（五）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/08/30/ios-autolayout-and-frame-part-5/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-08-30T14:58:24.000Z">
+          2025-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在实现消息流（如微博、朋友圈）功能时，选择<code>Frame</code>布局还是<code>AutoLayout</code>需综合性能、开发效率和适配需求，以下是具体分析：</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、核心对比与选型建议"><a href="#一、核心对比与选型建议" class="headerlink" title="一、核心对比与选型建议"></a>一、核心对比与选型建议</h3><ol>
+<li><p><strong>AutoLayout优势场景</strong>  </p>
+<ul>
+<li><strong>动态内容适配</strong>：适合文本长度不定、图片数量可变（如九宫格）的卡片布局，通过约束自动调整高度。  </li>
+<li><strong>多设备适配</strong>：自动处理横竖屏切换、不同屏幕尺寸（如iPhone&#x2F;iPad分屏），减少硬编码计算。  </li>
+<li><strong>开发效率</strong>：结合<code>UIStackView</code>或第三方库（如<code>FlexLayout</code>）可简化嵌套布局代码。</li>
+</ul>
+</li>
+<li><p><strong>Frame布局适用场景</strong>  </p>
+<ul>
+<li><strong>高性能需求</strong>：高频滚动的列表（如朋友圈）中，直接计算<code>frame</code>可减少布局引擎开销，提升帧率。  </li>
+<li><strong>固定尺寸元素</strong>：对头像、图标等静态内容，直接设置<code>frame</code>更高效。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="二、混合优化策略"><a href="#二、混合优化策略" class="headerlink" title="二、混合优化策略"></a>二、混合优化策略</h3><ol>
+<li><p><strong>性能平衡方案</strong>  </p>
+<ul>
+<li><strong>静态部分用Frame</strong>：如卡片背景、分割线等固定元素，直接计算位置。  </li>
+<li><strong>动态部分用AutoLayout</strong>：文本、图片容器等通过约束动态调整，结合<code>systemLayoutSizeFitting</code>预估算高度。</li>
+</ul>
+</li>
+<li><p><strong>工具辅助</strong>  </p>
+<ul>
+<li><strong>预计算与缓存</strong>：对动态高度单元格（如微博正文），提前计算并缓存布局结果。  </li>
+<li><strong>异步计算</strong>：将复杂布局（如九宫格图片位置）放到后台线程处理。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、实战推荐"><a href="#三、实战推荐" class="headerlink" title="三、实战推荐"></a>三、实战推荐</h3><ul>
+<li><strong>优先AutoLayout</strong>：现代App开发中，默认使用<code>AutoLayout</code>（尤其iOS12+），兼顾开发效率和适配性。  </li>
+<li><strong>局部Frame优化</strong>：对性能敏感区域（如列表滚动），可通过<code>layoutSubviews</code>手动调整部分<code>frame</code>。  </li>
+<li><strong>避免混用冲突</strong>：同一视图层级内避免同时使用两种方式，需明确分层设计。</li>
+</ul>
+<p>引用链接：<br>[1] <a target="_blank" rel="noopener" href="https://blog.csdn.net/rrgbf0123/article/details/78009825">autolayout和frame - CSDN博客</a><br>[2] <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903902802870286">iOS中的Auto Layout和Frame  - 掘金开发者社区</a><br>[3] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1117027">iOS 布局进阶:你真的会用 autolayout 么? - 腾讯云</a><br>[4] <a target="_blank" rel="noopener" href="https://modao.ink/ad/blog/app-ui-design.html">6种常见APP界面设计布局,新手也能快速掌握!  - 墨刀</a><br>[5] <a target="_blank" rel="noopener" href="http://www.pgwzsj.com/article/djjigi.html">如何通过frame适配以及AutoLayout-创新互联 - www.pgwzsj.com</a><br>[6] <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/50534735/answer/121821730">iOS frame布局 与 自动布局有什么区别呢? - Z Jason</a><br>[7] <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_16175447/12731473">iOS中利用autolayout自动布局 设置的约束在什么时候会计算为frame - 51CTO博客</a><br>[8] <a target="_blank" rel="noopener" href="https://blog.csdn.net/gitblog_00721/article/details/148375473">A-Frame项目最佳实践指南:从架构设计到性能优化 - CSDN博客</a><br>[9] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1497002">六大布局之FrameLayout - 腾讯云</a><br>[10] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/information/%E7%A4%BE%E4%BA%A4%E4%BA%92%E5%8A%A8%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-article">社交互动最佳实践 - 腾讯云</a><br>[11] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/jgCho/p/5065775.html">iOS开发～UI布局(三)深入理解autolayout - 博客园</a><br>[12] <a target="_blank" rel="noopener" href="https://blog.csdn.net/RuiWang321/article/details/50380493">AutoLayout神话:Table View的性能和iPad分屏多任务功能 - CSDN博客</a><br>[13] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/fengju/p/6173615.html">AutoLayout技术选型和应用 - 博客园</a><br>[14] <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/36611688">iOS开发者为什么对Autolayout以及Storyboard(或者xib)的看法差别那么大? - aaaron7</a><br>[15] <a target="_blank" rel="noopener" href="https://blog.51cto.com/u_16213701/11868933">ios 代码写布局autolayout xcode布局约束_mob64ca14147fe3的技术博客_51CTO博客 - 51CTO博客</a><br>[16] <a target="_blank" rel="noopener" href="http://zoyi14.smartapps.cn/pages/note/index?origin=other&slug=3971821bb1a3">类似QQ、微信、微博的WeiBoLayout(优化版) - 简书</a><br>[17] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/gzggyy/archive/2012/11/13/2768196.html">新浪微博布局学习——活用RelativeLayout - 博客园</a><br>[18] <a target="_blank" rel="noopener" href="https://blog.csdn.net/deft_mkjing/article/details/53413777">iOS纯Autolayout实现微信朋友圈和通讯录另附App启动页短视频效果_auto微信布局分析-CSDN博客 - CSDN</a><br>[19] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42613017/article/details/148019344">掌握自适应布局:从Frame Layout到自适应单元格 - CSDN博客</a><br>[20] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/597702152">社交场景下iOS消息流交互层实践 - 云音乐技术团队</a><br>[21] <a target="_blank" rel="noopener" href="https://blog.csdn.net/liululu2015/article/details/90379744">frame 或者 autoLayout? - CSDN博客</a><br>[22] <a target="_blank" rel="noopener" href="https://blog.csdn.net/mgw731010/article/details/149309517">前端内功修炼:5大主流布局系统进阶(最新升级版) - CSDN博客</a><br>[23] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/cjpBlog/p/4666060.html">屏幕适配Autoresizing &#x2F; Autolayout &#x2F; Mansory &#x2F; 自定义Frame实现 - 博客园</a><br>[24] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7304183749629116450">视图&amp;图像相关  - 掘金开发者社区</a><br>[25] <a target="_blank" rel="noopener" href="https://weibo.com/6779603632/HA3ed1HFx">iOS 布局用 Frame 用 AutoLayout (Masonry)… 来自V2EX热议 - 微博 - V2EX热议</a><br>[26] <a target="_blank" rel="noopener" href="https://my.oschina.net/emacs_7316616/blog/11371068">深入研究 Layout 技术解析与实战应用 ——从 ReactiveCocoaLayout 到 FlowLayout 的布局构建逻辑 - 开源中国</a><br>[27] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fcce88b7033b">关于朋友圈列表和微博列表的优化方案总结 - 简书 - 简书社区</a><br>[28] <a target="_blank" rel="noopener" href="https://blog.csdn.net/feng1790291543/article/details/138423329">【独家】移动应用性能优化最佳实践 - CSDN博客</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
