@@ -88,6 +88,7 @@
     <div class="entry">
       
         <p>在iOS开发中处理复杂布局时，选择AutoLayout还是Frame布局需根据具体场景权衡，以下是关键对比和优化建议：</p>
+<hr>
 <span id="more"></span>
 
 <h3 id="一、核心差异对比"><a href="#一、核心差异对比" class="headerlink" title="一、核心差异对比"></a>一、核心差异对比</h3><br>
@@ -121,31 +122,44 @@
 <td>需完全重算frame，适合静态布局</td>
 </tr>
 </tbody></table>
-<h3 id="二、适用场景建议"><a href="#二、适用场景建议" class="headerlink" title="二、适用场景建议"></a>二、适用场景建议</h3><br>
-
-<h4 id="1-优先选择AutoLayout的情况"><a href="#1-优先选择AutoLayout的情况" class="headerlink" title="1. 优先选择AutoLayout的情况"></a>1. 优先选择AutoLayout的情况</h4><ul>
+<hr>
+<h3 id="二、适用场景建议"><a href="#二、适用场景建议" class="headerlink" title="二、适用场景建议"></a>二、适用场景建议</h3><ol>
+<li><p><strong>优先选择AutoLayout的情况</strong></p>
+<ul>
 <li>需要支持多设备尺寸（如iPhone&#x2F;iPad适配）</li>
 <li>布局存在动态变化（如国际化文本、交互式UI）</li>
-<li>使用UIStackView或嵌套布局时（简化约束层级）<br></li>
+<li>使用UIStackView或嵌套布局时（简化约束层级）&#x3D;</li>
 </ul>
-<h4 id="2-优先选择Frame布局的情况"><a href="#2-优先选择Frame布局的情况" class="headerlink" title="2. 优先选择Frame布局的情况"></a>2. 优先选择Frame布局的情况</h4><ul>
+</li>
+<li><p><strong>优先选择Frame布局的情况</strong></p>
+<ul>
 <li>高性能要求的场景（如高频滚动的列表项）</li>
 <li>固定尺寸的动画或特效（需精确控制每一帧）</li>
-<li>遗留项目维护（避免混合布局引发冲突）<br></li>
+<li>遗留项目维护（避免混合布局引发冲突）</li>
 </ul>
-<h3 id="三、混合使用与优化策略"><a href="#三、混合使用与优化策略" class="headerlink" title="三、混合使用与优化策略"></a>三、混合使用与优化策略</h3><br>
-
-<h4 id="1-性能平衡方案"><a href="#1-性能平衡方案" class="headerlink" title="1. 性能平衡方案"></a>1. 性能平衡方案</h4><ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、混合使用与优化策略"><a href="#三、混合使用与优化策略" class="headerlink" title="三、混合使用与优化策略"></a>三、混合使用与优化策略</h3><ol>
+<li><p><strong>性能平衡方案</strong></p>
+<ul>
 <li>对复杂但静态的部分（如背景层）使用frame，动态内容用autolayout</li>
-<li>通过intrinsicContentSize自定义视图的自动布局行为<br></li>
+<li>通过intrinsicContentSize自定义视图的自动布局行为</li>
 </ul>
-<h4 id="2-工具辅助"><a href="#2-工具辅助" class="headerlink" title="2. 工具辅助"></a>2. 工具辅助</h4><ul>
+</li>
+<li><p><strong>工具辅助</strong></p>
+<ul>
 <li>使用Lazy Loading延迟加载非可见区域的布局计算</li>
-<li>通过Instrument检测布局耗时，针对性优化<br></li>
+<li>通过Instrument检测布局耗时，针对性优化</li>
 </ul>
-<h4 id="3-第三方替代方案"><a href="#3-第三方替代方案" class="headerlink" title="3. 第三方替代方案"></a>3. 第三方替代方案</h4><ul>
-<li>考虑FlexLayout或MyLinearLayout等封装库，简化代码并提升性能<br></li>
+</li>
+<li><p><strong>第三方替代方案</strong></p>
+<ul>
+<li>考虑FlexLayout或MyLinearLayout等封装库，简化代码并提升性能</li>
 </ul>
+</li>
+</ol>
+<hr>
 <h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><ul>
 <li><strong>推荐默认使用AutoLayout</strong>：兼顾开发效率和适配性，尤其适合现代App开发</li>
 <li><strong>谨慎使用Frame</strong>：仅在性能敏感或特殊交互场景下作为补充</li>
