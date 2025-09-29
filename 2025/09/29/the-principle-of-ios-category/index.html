@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS Category实现原理解析 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS Category实现原理解析"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS Category实现原理解析</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/09/29/the-principle-of-ios-category/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-09-29T20:31:13.000Z">
+          2025-09-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在iOS开发中，Category（类别）是Objective-C中的一个强大特性，允许开发者在不修改原始类源代码的情况下，给类添加方法或属性。这一特性主要通过Objective-C的运行时特性实现。下面将详细介绍Category的实现原理。</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、Category底层数据结构"><a href="#一、Category底层数据结构" class="headerlink" title="一、Category底层数据结构"></a>一、Category底层数据结构</h3><p>Objective-C中的Category在runtime中被表示为struct category_t结构体，其定义包含分类名称、所属类名、实例方法列表、类方法列表、协议列表等信息。具体结构如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> category_t &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="type">char</span> *name;  <span class="comment">// 分类名称</span></span><br><span class="line">    classref_t cls;  <span class="comment">// 所属类</span></span><br><span class="line">    <span class="keyword">struct</span> method_list_t *instanceMethods;  <span class="comment">// 实例方法列表</span></span><br><span class="line">    <span class="keyword">struct</span> method_list_t *classMethods;  <span class="comment">// 类方法列表</span></span><br><span class="line">    <span class="keyword">struct</span> protocol_list_t *protocols;  <span class="comment">// 协议列表</span></span><br><span class="line">    <span class="keyword">struct</span> property_list_t *instanceProperties;  <span class="comment">// 实例属性列表</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>编译时，Category中的方法会被编译到这个结构体中，但尚未添加到类对象或元类对象中。</p>
+<hr>
+<h3 id="二、Category加载机制"><a href="#二、Category加载机制" class="headerlink" title="二、Category加载机制"></a>二、Category加载机制</h3><h4 id="运行时加载过程"><a href="#运行时加载过程" class="headerlink" title="运行时加载过程"></a>运行时加载过程</h4><ol>
+<li><strong>初始化入口‌</strong>：runtime初始化时通过_objc_init函数注册map_images、load_images等回调函数。</li>
+<li><strong>映射阶段‌</strong>：map_images_nolock函数调用_read_images读取模块信息。</li>
+<li><strong>方法合并‌</strong>：运行时动态将Category的方法添加到类对象的方法列表中，具体操作是将分类方法插入到主类方法列表的前面。这种机制导致分类方法看似”覆盖”了原类方法，实际上是因查找顺序优先而被调用。</li>
+</ol>
+<h4 id="特殊方法调用"><a href="#特殊方法调用" class="headerlink" title="特殊方法调用"></a>特殊方法调用</h4><ul>
+<li><strong>+load方法‌</strong>：在dyld装载程序初始化runtime环境时调用，所有类、分类的+load方法都会被执行，调用顺序为：父类-&gt;子类-&gt;分类。</li>
+<li><strong>+initialize方法‌</strong>：首次使用类时调用一次，采用消息机制调用，因此会受到分类方法”覆盖”影响。</li>
+</ul>
+<hr>
+<h3 id="三、Category与Extension的区别"><a href="#三、Category与Extension的区别" class="headerlink" title="三、Category与Extension的区别"></a>三、Category与Extension的区别</h3><br>
+
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Category</th>
+<th>Extension</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作用</td>
+<td>为已有类添加方法</td>
+<td>声明私有方法或属性</td>
+</tr>
+<tr>
+<td>文件位置</td>
+<td>独立的.h和.m文件</td>
+<td>类的.m文件中声明</td>
+</tr>
+<tr>
+<td>加载时机</td>
+<td>运行时动态加载</td>
+<td>编译时合并到类中</td>
+</tr>
+<tr>
+<td>命名</td>
+<td>必须命名(如ClassName+CategoryName)</td>
+<td>匿名</td>
+</tr>
+<tr>
+<td>属性支持</td>
+<td>需通过关联对象实现</td>
+<td>自动生成实例变量</td>
+</tr>
+<tr>
+<td>方法覆盖</td>
+<td>可能覆盖原类方法</td>
+<td>编译时报错(若未实现)</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>公开(需导入头文件)</td>
+<td>私有(仅类内部可见)</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="四、Category的局限性及注意事项"><a href="#四、Category的局限性及注意事项" class="headerlink" title="四、Category的局限性及注意事项"></a>四、Category的局限性及注意事项</h3><ol>
+<li><strong>无法添加实例变量‌</strong>：Category结构体中没有成员变量列表，只能添加方法。</li>
+<li><strong>方法名冲突</strong>：同名方法调用优先级为：分类 &gt; 本类 &gt; 父类；多个分类中的同名方法由编译顺序决定调用哪个。</li>
+<li><strong>属性处理‌</strong>：虽然可以声明@property，但不会自动生成setter&#x2F;getter方法和实例变量，需通过关联对象实现。</li>
+<li><strong>使用建议‌</strong>：<ul>
+<li>避免重写系统方法或第三方库方法。</li>
+<li>大型项目中按功能模块划分Category。</li>
+<li>为系统类扩展功能时优先使用Category。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="五、关联对象实现属性"><a href="#五、关联对象实现属性" class="headerlink" title="五、关联对象实现属性"></a>五、关联对象实现属性</h3><p>虽然Category不能直接添加实例变量，但可以通过关联对象技术间接实现属性存储：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加关联对象</span></span><br><span class="line">objc_setAssociatedObject(obj, &amp;key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取关联对象</span></span><br><span class="line"><span class="type">id</span> value = objc_getAssociatedObject(obj, &amp;key);</span><br></pre></td></tr></table></figure>
+
+<p>这种方法允许Category”拥有”属性，但需注意内存管理策略的选择。</p>
+<p>Category作为Objective-C的重要特性，通过runtime的动态加载机制实现了对类的非侵入式扩展，为iOS开发提供了极大的灵活性和模块化能力。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

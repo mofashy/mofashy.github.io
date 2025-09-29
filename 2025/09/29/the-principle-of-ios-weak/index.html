@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS Weak实现原理解析 | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iOS Weak实现原理解析"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>iOS Weak实现原理解析</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/09/29/the-principle-of-ios-weak/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-09-29T20:45:53.000Z">
+          2025-09-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>iOS的<code>weak</code>实现原理基于Objective-C运行时和SideTable机制，核心是通过‌弱引用表‌（weak_table_t）和‌引用计数表‌（SideTable）协同管理对象生命周期。以下是关键细节：</p>
+<hr>
+<span id="more"></span>
+
+<h3 id="一、底层数据结构"><a href="#一、底层数据结构" class="headerlink" title="一、底层数据结构"></a>一、底层数据结构</h3><ul>
+<li><p><strong>SideTable‌</strong>：每个对象关联一个SideTable，包含：</p>
+<ul>
+<li><code>spinlock_t</code>（自旋锁）：保证线程安全。</li>
+<li><code>RefcountMap</code>（引用计数表）：存储对象的引用计数。</li>
+<li><code>weak_table_t</code>（弱引用表）：存储所有指向该对象的weak指针。</li>
+</ul>
+</li>
+<li><p><strong>weak_table_t</strong>：全局哈希表，以对象地址为key，存储所有指向该对象的弱引用指针地址数组（value）。  </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> weak_table_t &#123;</span><br><span class="line">    weak_entry_t *weak_entries;  <span class="comment">// 动态数组，存储弱引用条目</span></span><br><span class="line">    size_t num_entries;          <span class="comment">// 当前条目数</span></span><br><span class="line">    uintptr_t mask;              <span class="comment">// 哈希表容量掩码</span></span><br><span class="line">    uintptr_t max_hash_displacement; <span class="comment">// 最大哈希冲突步长</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>weak_entry_t</strong>：哈希表的条目，记录对象地址（referent）和弱引用指针集合（referrers），采用共用体优化内存占用。</p>
+</li>
+</ul>
+<hr>
+<h3 id="二、weak指针的工作流程"><a href="#二、weak指针的工作流程" class="headerlink" title="二、weak指针的工作流程"></a>二、weak指针的工作流程</h3><ol>
+<li><p><strong>初始化</strong>  </p>
+<ul>
+<li>当声明<code>__weak id obj = strongObj</code>时，编译器调用<code>objc_initWeak</code>函数，。  </li>
+<li>运行时将<code>weak</code>指针地址（<code>&amp;obj</code>）和对象地址（<code>strongObj</code>）注册到弱引用表中。</li>
+</ul>
+</li>
+<li><p><strong>‌存储方式</strong>  </p>
+<ul>
+<li>弱引用表使用对象的地址作为键，通过哈希表快速定位到对应的<code>weak_entry_t</code>。</li>
+<li><code>weak_entry_t</code>内部存储所有指向该对象的<code>weak</code>指针地址（数组或链表结构）。</li>
+<li>通过自旋锁保证多线程环境下弱引用表的操作安全性。</li>
+</ul>
+</li>
+<li><p><strong>对象释放时</strong>  </p>
+<ul>
+<li>当对象的引用计数为0时，<code>dealloc</code>方法会调用<code>weak_clear_no_lock</code>。</li>
+<li>遍历弱引用表中所有指向该对象的<code>weak</code>指针，将其置为<code>nil</code>（防止悬垂指针）。</li>
+<li>清理完成后，从weak表中删除对应的<code>weak_entry_t</code>条目。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、自动置nil机制"><a href="#三、自动置nil机制" class="headerlink" title="三、自动置nil机制"></a>三、自动置nil机制</h3><ul>
+<li>‌<strong>触发时机‌</strong>：对象被释放时，通过objc_destructInstance触发弱引用清理。</li>
+<li>‌<strong>线程安全‌</strong>：通过SideTable的自旋锁保证多线程下弱引用表的操作安全。</li>
+<li>‌<strong>性能优化‌</strong>：弱引用表使用开放寻址法解决哈希冲突，减少内存碎片。</li>
+</ul>
+<hr>
+<h3 id="四、与unsafe-unretained的区别"><a href="#四、与unsafe-unretained的区别" class="headerlink" title="四、与unsafe_unretained的区别"></a>四、与<code>unsafe_unretained</code>的区别</h3><br>
+
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>weak</th>
+<th>unsafe_unretained</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动置nil</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>高(避免野指针)</td>
+<td>低(可能访问已释放对象)</td>
+</tr>
+<tr>
+<td>性能开销</td>
+<td>有(维护weak表)</td>
+<td>无</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>循环引用解决</td>
+<td>性能敏感且能确保对象生命周期的场景</td>
+</tr>
+<tr>
+<td>兼容性</td>
+<td>仅ARC环境</td>
+<td>ARC&#x2F;MRC均可</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="五、性能优化建议"><a href="#五、性能优化建议" class="headerlink" title="五、性能优化建议"></a>五、性能优化建议</h3><ol>
+<li><strong>避免过度使用weak‌</strong>：每个weak引用都需要维护全局weak表，频繁操作会影响性能。</li>
+<li>‌<strong>优先使用strong‌</strong>：在明确知道不会造成循环引用的场景使用strong引用。</li>
+<li>‌<strong>局部weak变量‌</strong>：方法内部的weak变量在作用域结束后会自动清理，比属性更高效。</li>
+<li><strong>注意线程安全‌</strong>：weak操作不是完全线程安全的，多线程环境需谨慎。</li>
+</ol>
+<hr>
+<h3 id="六、典型应用场景"><a href="#六、典型应用场景" class="headerlink" title="六、典型应用场景"></a>六、典型应用场景</h3><ol>
+<li><strong>Delegate模式‌</strong>：防止相互强引用导致的内存泄漏。</li>
+<li><strong>Block捕获‌</strong>：通过<code>__weak typeof(self)</code>配合<code>__strong</code>临时强引用，避免block执行期间对象意外释放。</li>
+<li><strong>NSTimer目标对象‌</strong>：解决timer与目标对象间的循环引用。</li>
+<li><strong>父子对象关系‌</strong>：子对象对父对象的引用通常应为weak。</li>
+</ol>
+<p><code>weak</code>的实现本质是‌<strong>通过全局弱引用表动态跟踪对象状态‌</strong>，结合SideTable的线程安全机制和哈希表高效查找，实现了安全、自动化的弱引用管理。这一设计平衡了内存安全与运行时性能。</p>
+<p>引用链接：<br>[1] <a target="_blank" rel="noopener" href="https://download.csdn.net/blog/column/10349259/117879195">iOS之深入解析weak关键字的底层原理 - CSDN下载</a><br>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_80253909/article/details/149864608">「iOS」————weak底层原理 - CSDN博客</a><br>[3] <a target="_blank" rel="noopener" href="https://blog.csdn.net/chabuduoxs/article/details/126000448">iOS——weak实现原理 - CSDN博客</a><br>[4] <a target="_blank" rel="noopener" href="https://www.cloud.tencent.com/developer/article/1369011">iOS weak的实现原理 - www.cloud.tencent.com</a><br>[5] <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_63852285/article/details/131858578">[iOS] weak关键字的实现原理 - CSDN博客</a><br>[6] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27945615/article/details/137058861">深入解析Objective-C中的weak引用实现原理,-CSDN博客 - CSDN博客</a><br>[7] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_52192405/article/details/125994993">[OC学习笔记]weak的实现原理 - CSDN博客</a><br>[8] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42593130/article/details/146929380">理解Objective-C 弱引用与内存管理 - CSDN博客</a><br>[9] <a target="_blank" rel="noopener" href="https://blog.csdn.net/2401_84434331/article/details/138282257">iOS开发进阶(十六): Objective-C block、weakself、strongself_data - CSDN博客</a><br>[10] <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012046379/article/details/50838777">浅析objective-c中的strong和weak - CSDN博客</a><br>[11] <a target="_blank" rel="noopener" href="https://blog.csdn.net/qfeung/article/details/139457825">weak的底层原理 - CSDN博客</a><br>[12] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7470394526323671092/">揭开iOS 中 weak 指针的神秘面纱:从原理到实践  - 掘金开发者社区</a><br>[13] <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51638861/article/details/126065747">[iOS开发] ——weak底层原理 - CSDN博客</a><br>[14] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/mysweetAngleBaby/p/16341648.html">老生常谈的iOS- weak原理,你真的懂得还是为了应付面试 - 博客园</a><br>[15] <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_52192682/article/details/125948436">[iOS]-weak底层原理(sidetable相关,附带引用计数原理) - CSDN博客</a><br>[16] <a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_62386635/article/details/131767655">[iOS] —— 属性关键字及weak关键字底层原理_ios weak-CSDN博客 - CSDN博客</a><br>[17] <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2052762">iOS_Runtime是什么?原理?作用?怎么实现weak?使用 - 腾讯云</a><br>[18] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/228790924">iOS中Objective-C&amp;Swift知识点梳理 - Jonathan</a><br>[19] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7170775802823311390">Tip4 - 关于 Weak 应该知道的  - 掘金开发者社区</a><br>[20] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e1a1a493c80e">iOS weak的实现原理详解 - 简书 - 简书社区</a><br>[21] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1b566137b3fe">iOS weak实现原理和销毁过程 - 简书社区</a><br>[22] <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c209eaa090c4">iOS内存管理08 – weak的底层实现原理 - 简书 - 简书社区</a><br>[23] <a target="_blank" rel="noopener" href="https://luowei.github.io/%E5%8E%9F%E7%90%86/16070583973992.html">iOS weak 底层实现原理 - luowei.github.io</a><br>[24] <a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/353148711230447616">iOS weak 底层实现原理(二):objc-weak 函数列表全解析_牛客网 - 牛客网</a><br>[25] <a target="_blank" rel="noopener" href="https://blog.csdn.net/allanGold/article/details/136059504">[iOS分类、关联对象]如何使用关联对象给分类实现一个weak的属性 - CSDN博客</a><br>[26] <a target="_blank" rel="noopener" href="https://blog.csdn.net/u012997373/article/details/140880046">iOS弱引用 - CSDN博客</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
