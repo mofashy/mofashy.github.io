@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>软件设计模式之MVC、MVP、MVVM、MVA、MVI | MOFASHY | Live Is Life</title>
+
+  
+  <meta name="author" content="Mofashy">
+  
+
+  
+  <meta name="description" content="宇宙的尽头是什么？整点薯条！">
+  
+
+  
+  
+  <meta name="keywords" content="iOS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="软件设计模式之MVC、MVP、MVVM、MVA、MVI"/>
+
+  <meta property="og:site_name" content="MOFASHY"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/images/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="MOFASHY" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">MOFASHY</a>
+    </h1>
+    <p class="site-description">Live Is Life</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+        <li><a href="/atom.xml">订阅</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>软件设计模式之MVC、MVP、MVVM、MVA、MVI</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2025/10/05/design-patterns-of-mvc-mvp-mvvm-mva-mvi/" rel="bookmark">
+        <time class="entry-date published" datetime="2025-10-05T09:31:50.000Z">
+          2025-10-05
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>软件架构设计是将软件一些共有的特征转换为满足业务需求和技术要求的结构化方案的过程。软件架构设计的目的是为了实现系统的长期可维护性、可扩展性、可靠性和安全性，以满足业务需求和未来可能的变化。</p>
+<p>在过去的几年里，软件架构的设计模式层出不穷，每一个模式的出现，都是试图想使代码更可读、更容易于测试、更易于维护以及让开发人员更轻松。但同时，每个模式的出现也都有适应的场景和优劣。</p>
+<span id="more"></span>
+
+<p>本文主要对MVC、MVP、MVVM、MVA、MVI五个常见的设计模式做一个汇总的介绍。</p>
+<h3 id="一、五种软件架构模式的详解和对比"><a href="#一、五种软件架构模式的详解和对比" class="headerlink" title="一、五种软件架构模式的详解和对比"></a>一、五种软件架构模式的详解和对比</h3><h4 id="1、MVC（Model-View-Controller）"><a href="#1、MVC（Model-View-Controller）" class="headerlink" title="1、MVC（Model-View-Controller）"></a>1、MVC（Model-View-Controller）</h4><ul>
+<li><strong>核心结构</strong>：分为模型（数据与业务逻辑）、视图（用户界面）、控制器（协调层）。</li>
+<li><strong>数据流</strong>：View → Controller → Model → View，但Model可直接更新View导致耦合。</li>
+<li><strong>优点</strong>：职责分离简单，适合小型项目。</li>
+<li><strong>缺点</strong>：Controller易臃肿，View与Model未完全解耦。</li>
+</ul>
+<h4 id="2、MVP（Model-View-Presenter）"><a href="#2、MVP（Model-View-Presenter）" class="headerlink" title="2、MVP（Model-View-Presenter）"></a>2、MVP（Model-View-Presenter）</h4><ul>
+<li><strong>改进点</strong>：引入Presenter替代Controller，完全隔离View与Model，通过接口通信。</li>
+<li><strong>数据流</strong>：View → Presenter → Model → Presenter → View，单向且解耦。</li>
+<li><strong>优点</strong>：便于单元测试，View可复用。</li>
+<li><strong>缺点</strong>：接口数量随业务增长膨胀，Presenter可能内存泄漏。</li>
+</ul>
+<h4 id="3、MVVM（Model-View-ViewModel）"><a href="#3、MVVM（Model-View-ViewModel）" class="headerlink" title="3、MVVM（Model-View-ViewModel）"></a>3、MVVM（Model-View-ViewModel）</h4><ul>
+<li><strong>关键特性</strong>：ViewModel通过双向绑定（如LiveData）自动同步View和Model，减少模板代码。</li>
+<li><strong>数据流</strong>：双向绑定实现View与Model实时交互。</li>
+<li><strong>优点</strong>：开发效率高，适合数据驱动型UI。</li>
+<li><strong>缺点</strong>：调试复杂，过度绑定可能引发性能问题。</li>
+</ul>
+<h4 id="4、MVI（Model-View-Intent）"><a href="#4、MVI（Model-View-Intent）" class="headerlink" title="4、MVI（Model-View-Intent）"></a>4、MVI（Model-View-Intent）</h4><ul>
+<li><strong>设计思想</strong>：严格单向数据流，用户意图（Intent）触发状态（State）更新，View渲染不可变状态。</li>
+<li><strong>数据流</strong>：View → Intent → Model → State → View，强调状态管理。</li>
+<li><strong>优点</strong>：状态可预测，利于复杂交互场景。</li>
+<li><strong>缺点</strong>：状态膨胀可能增加内存开销。</li>
+</ul>
+<h4 id="5、MVA（Model-View-Adapter）"><a href="#5、MVA（Model-View-Adapter）" class="headerlink" title="5、MVA（Model-View-Adapter）"></a>5、MVA（Model-View-Adapter）</h4><ul>
+<li><strong>改进点</strong>：引入Adapter，完全隔离View与Model，类似MVP但更轻量。</li>
+<li><strong>数据流</strong>：Adapter桥接Model与View，处理双向数据绑定‌。</li>
+<li><strong>优点</strong>：简化View逻辑，适合数据个复杂的场景。</li>
+<li><strong>缺点</strong>：Adapter可能成为新的复杂度来源。</li>
+</ul>
+<h4 id="对比总结"><a href="#对比总结" class="headerlink" title="对比总结"></a>对比总结</h4><table>
+<thead>
+<tr>
+<th>架构</th>
+<th>核心特点</th>
+<th>解耦程度</th>
+<th>数据流</th>
+<th>适用场景</th>
+<th>典型问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MVC</td>
+<td>Controller中介，View与Model可能耦合</td>
+<td>部分解耦</td>
+<td>双向&#x2F;部分解耦</td>
+<td>小型项目</td>
+<td>简单应用，快速开发</td>
+</tr>
+<tr>
+<td>MVP</td>
+<td>Presenter手动同步，高解耦</td>
+<td>完全解耦</td>
+<td>单向</td>
+<td>中大型项目</td>
+<td>需要高测试性的项目</td>
+</tr>
+<tr>
+<td>MVVM</td>
+<td>数据绑定，ViewModel解耦</td>
+<td>高度解耦</td>
+<td>双向绑定</td>
+<td>复杂UI，数据驱动应用</td>
+<td>调试困难</td>
+</tr>
+<tr>
+<td>MVI</td>
+<td>单向数据流，状态不可变</td>
+<td>完全解耦</td>
+<td>严格单向</td>
+<td>响应式或状态密集型应用</td>
+<td>状态管理成本高</td>
+</tr>
+<tr>
+<td>MVA</td>
+<td>Adapter转换数据格式</td>
+<td>完全解耦</td>
+<td>双向绑定</td>
+<td>数据展示逻辑复杂的场景</td>
+<td>Adapter可能成为新的复杂度来源</td>
+</tr>
+</tbody></table>
+<p>各架构演进反映了对解耦、测试性和状态管理的持续优化。实际选择需权衡项目规模、团队经验及技术栈支持。</p>
+<h3 id="二、五种软件架构模式在iOS开发中的应用"><a href="#二、五种软件架构模式在iOS开发中的应用" class="headerlink" title="二、五种软件架构模式在iOS开发中的应用"></a>二、五种软件架构模式在iOS开发中的应用</h3><br>
+
+<h3 id="1、MVC"><a href="#1、MVC" class="headerlink" title="1、MVC"></a>1、MVC</h3><br>
+
+<h4 id="模型层（Model）实现"><a href="#模型层（Model）实现" class="headerlink" title="模型层（Model）实现"></a>模型层（Model）实现</h4><p>模型负责数据存储和业务逻辑，通常定义为独立类或结构体。例如用户登录场景中，可创建LandModel类管理账户数据，包含初始化方法和数据接口。模型应完全独立于UI，通过属性封装数据，并提供方法处理业务规则（如数据验证或网络请求）。</p>
+<h4 id="视图层（View）构建"><a href="#视图层（View）构建" class="headerlink" title="视图层（View）构建"></a>视图层（View）构建</h4><p>视图由UIKit组件（如UILabel、UIButton）或自定义<em>UIView</em>子类构成，仅负责界面呈现和用户输入响应。例如登录界面中的文本框和按钮应通过XIB或代码创建，但避免在视图中直接处理业务逻辑。视图通过<em>IBOutlet</em>与控制器连接，或通过<em>addTarget</em>绑定用户交互事件。</p>
+<h4 id="控制器层（Controller）协调"><a href="#控制器层（Controller）协调" class="headerlink" title="控制器层（Controller）协调"></a>控制器层（Controller）协调</h4><p>控制器继承<em>UIViewController</em>，负责管理视图生命周期并协调模型与视图的交互。典型实现包括：</p>
+<ul>
+<li><strong>数据传递</strong>：控制器从模型获取数据并格式化后传递给视图显示；</li>
+<li><strong>事件处理</strong>：响应用户操作（如按钮点击），调用模型方法更新数据，再刷新视图；</li>
+<li><strong>通信机制</strong>：通过委托模式、通知中心或KVO实现跨层通信，例如模型数据变更时通知控制器更新UI。</li>
+</ul>
+<h4 id="模块间通信示例"><a href="#模块间通信示例" class="headerlink" title="模块间通信示例"></a>模块间通信示例</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Model</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserModel</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">updateName</span>(<span class="keyword">_</span> <span class="params">newName</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        name <span class="operator">=</span> newName</span><br><span class="line">        <span class="type">NotificationCenter</span>.default.post(name: .nameUpdated, object: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ViewController</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProfileVC</span>: <span class="title class_">UIViewController</span> &#123;</span><br><span class="line">    <span class="keyword">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> nameLabel: <span class="type">UILabel</span>!</span><br><span class="line">    <span class="keyword">var</span> user <span class="operator">=</span> <span class="type">UserModel</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">func</span> <span class="title function_">viewDidLoad</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="type">NotificationCenter</span>.default.addObserver(<span class="keyword">self</span>, selector: <span class="keyword">#selector</span>(updateUI), name: .nameUpdated, object: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">@objc</span> <span class="keyword">func</span> <span class="title function_">updateUI</span>() &#123;</span><br><span class="line">        nameLabel.text <span class="operator">=</span> user.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化建议"><a href="#优化建议" class="headerlink" title="优化建议"></a>优化建议</h4><ul>
+<li><strong>减少控制器臃肿</strong>：将数据解析、网络请求等逻辑移至模型层；</li>
+<li><strong>视图复用</strong>：通过自定义视图类封装重复UI组件；</li>
+<li><strong>测试性</strong>：因模型独立于UI，可单独进行单元测试。</li>
+</ul>
+<p>通过这种分层设计，MVC模式能有效提升代码可维护性，尤其适合中小型iOS应用。对于更复杂场景，可考虑结合MVVM等衍生模式。</p>
+<h3 id="2、MVP"><a href="#2、MVP" class="headerlink" title="2、MVP"></a>2、MVP</h3><br>
+
+<h4 id="2-1、核心组件划分"><a href="#2-1、核心组件划分" class="headerlink" title="2-1、核心组件划分"></a>2-1、核心组件划分</h4><p><strong>Model层</strong></p>
+<p>定义模型数据（如<code>User</code>类）和业务逻辑（如网络请求），保持与UIKit无关‌。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">fetchData</span>() &#123; <span class="comment">/* 网络请求逻辑 */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>View层</strong></p>
+<ul>
+<li><strong>视图协议</strong>：通过协议（如<code>LoginViewDelegate</code>）定义视图行为，避免直接操作Model。</li>
+<li><strong>视图实现</strong>：<code>UIView</code>或<code>UIViewControoler</code>仅处理UI渲染，通过闭包或KVO通知Presenter更新。</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protocol</span> <span class="title class_">LoginViewDelegate</span>: <span class="title class_">AnyObject</span> &#123;</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">loginWith</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LoginView</span>: <span class="title class_">UIView</span> &#123;</span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate: <span class="type">LoginViewDelegate</span>?</span><br><span class="line">    <span class="comment">// 控件初始化及事件绑定</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Presenter层</strong></p>
+<p>作为桥梁协调View与Model，处理业务逻辑并更新视图。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LoginPresenter</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> model <span class="operator">=</span> <span class="type">User</span>()</span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> view: <span class="type">LoginView</span>?</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">login</span>(<span class="params">username</span>: <span class="type">String</span>, <span class="params">password</span>: <span class="type">String</span>) &#123;</span><br><span class="line">        model.fetchData &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] result <span class="keyword">in</span></span><br><span class="line">            <span class="keyword">self</span><span class="operator">?</span>.view<span class="operator">?</span>.delegate<span class="operator">?</span>.loginWith(username: username, password: password)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2、通信机制"><a href="#2-2、通信机制" class="headerlink" title="2-2、通信机制"></a>2-2、通信机制</h4><ul>
+<li><strong>协议回调</strong>：View通过协议将用户操作传递给Presenter。</li>
+<li><strong>弱引用</strong>：使用<code>weak</code>避免循环引用，防止内存泄漏。</li>
+</ul>
+<h4 id="2-3、项目结构优化"><a href="#2-3、项目结构优化" class="headerlink" title="2-3、项目结构优化"></a>2-3、项目结构优化</h4><p>推荐按功能模块划分目录</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── Models/  </span><br><span class="line">├── Views/  </span><br><span class="line">├── Presenters/  </span><br><span class="line">└── Services/（网络/数据库）  </span><br></pre></td></tr></table></figure>
+
+<p>此结构便于团队协作和代码复用。</p>
+<h4 id="2-4、优势与注意事项"><a href="#2-4、优势与注意事项" class="headerlink" title="2-4、优势与注意事项"></a>2-4、优势与注意事项</h4><ul>
+<li><strong>优势</strong>：<ul>
+<li>视图逻辑与业务逻辑完全分离，提升可测试性；</li>
+<li>支持多端复用（如iPad和Mac）。</li>
+</ul>
+</li>
+<li><strong>注意事项</strong>：<ul>
+<li>避免Presenter过度臃肿，复杂逻辑可拆分为子模块；</li>
+<li>使用<code>@MainActor</code>确保UI线程安全。</li>
+</ul>
+</li>
+</ul>
+<p>通过合理应用MVP，可构建高内聚、低耦合的iOS应用，尤其适合需要显式解耦的中大型项目‌。</p>
+<h3 id="3、MVVM"><a href="#3、MVVM" class="headerlink" title="3、MVVM"></a>3、MVVM</h3><br>
+
+<h4 id="3-1、核心组件划分"><a href="#3-1、核心组件划分" class="headerlink" title="3-1、核心组件划分"></a>3-1、核心组件划分</h4><p><strong>Model层</strong></p>
+<p>定义数据模型（如<code>User</code>类），包含属性和业务逻辑（如网络请求），保持与UIKit无关‌。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">fetchData</span>() &#123; <span class="comment">/* 网络请求 */</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>View层</strong></p>
+<ul>
+<li><strong>SwiftUI</strong>：通过@State和@Binding与ViewModel交互，自动响应数据变化‌。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">UserView</span>: <span class="title class_">View</span> &#123;</span><br><span class="line">    <span class="meta">@StateObject</span> <span class="keyword">private</span> <span class="keyword">var</span> viewModel <span class="operator">=</span> <span class="type">UserViewModel</span>()</span><br><span class="line">    <span class="keyword">var</span> body: <span class="keyword">some</span> <span class="type">View</span> &#123; <span class="type">Text</span>(viewModel.user.name) &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>UIKit</strong>：通过KVO或闭包监听ViewModel数据更新‌。</li>
+</ul>
+<p><strong>ViewModel层</strong></p>
+<p>作为桥梁处理视图逻辑，通过<code>ObservableObject</code>和<code>@Published</code>实现数据驱动更新‌。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UserViewModel</span>: <span class="title class_">ObservableObject</span> &#123;</span><br><span class="line">    <span class="meta">@Published</span> <span class="keyword">var</span> user <span class="operator">=</span> <span class="type">User</span>()</span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">saveUser</span>() &#123; user.name <span class="operator">=</span> <span class="string">&quot;New Name&quot;</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2、双向绑定实现"><a href="#3-2、双向绑定实现" class="headerlink" title="3-2、双向绑定实现"></a>3-2、双向绑定实现</h4><ul>
+<li><strong>SwiftUI‌</strong>：利用<code>@StateObject</code>和<code>@EnvironmentObject</code>自动同步数据‌。</li>
+<li>‌<strong>UIKit‌</strong>：通过KVO监听属性变化，或使用第三方库（如RxSwift）实现响应式编程‌。</li>
+</ul>
+<h4 id="3-3、项目结构："><a href="#3-3、项目结构：" class="headerlink" title="3-3、项目结构："></a>3-3、项目结构：</h4><p>推荐按功能模块划分目录：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── Models/  </span><br><span class="line">├── Views/  </span><br><span class="line">├── ViewModels/  </span><br><span class="line">└── Services/（网络/数据库）  </span><br></pre></td></tr></table></figure>
+
+<p>此结构便于团队协作和代码复用‌。</p>
+<h4 id="3-4、优势与注意事项"><a href="#3-4、优势与注意事项" class="headerlink" title="3-4、优势与注意事项"></a>3-4、优势与注意事项</h4><ul>
+<li><strong>优势‌</strong>：<ul>
+<li>视图逻辑与业务逻辑分离，提升可测试性‌；</li>
+<li>支持多端复用（如iPad和Mac）‌。</li>
+</ul>
+</li>
+<li><strong>注意事项‌</strong>：<ul>
+<li>避免ViewModel过度臃肿，复杂逻辑可拆分为子模块‌；</li>
+<li>使用<code>@MainActor</code>确保UI线程安全‌。</li>
+</ul>
+</li>
+</ul>
+<p>通过合理应用MVVM，可构建高内聚、低耦合的iOS应用，尤其适合数据驱动型场景‌。</p>
+<h3 id="4、MVI"><a href="#4、MVI" class="headerlink" title="4、MVI"></a>4、MVI</h3><br>
+
+<h4 id="4-1、核心组件设计"><a href="#4-1、核心组件设计" class="headerlink" title="4-1、核心组件设计"></a>4-1、核心组件设计</h4><ul>
+<li><strong>Model（State）</strong>：使用不可变结构体（如Swift的<code>struct</code>）描述UI状态，包含加载状态、数据集合及错误信息等字段，确保线程安全且状态变化可追踪。例如：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">ArticleState</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> isLoading: <span class="type">Bool</span></span><br><span class="line">    <span class="keyword">var</span> articles: [<span class="type">Article</span>]</span><br><span class="line">    <span class="keyword">var</span> error: <span class="type">String</span>?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>View‌</strong>：通过<code>UIViewController</code>或SwiftUI的<code>View</code>订阅ViewModel输出的状态流，根据状态渲染UI，并将用户操作（如按钮点击）转换为Intent事件。</li>
+<li><strong>Intent‌</strong>：定义枚举类型表示用户操作（如<code>.loadArticles</code>、<code>.refresh</code>），由View传递给ViewModel处理。</li>
+</ul>
+<h4 id="4-2、响应式数据流实现"><a href="#4-2、响应式数据流实现" class="headerlink" title="4-2、响应式数据流实现"></a>4-2、响应式数据流实现</h4><ul>
+<li>使用<code>Combine</code>框架或<code>RxSwift</code>建立单向数据流：<ol>
+<li><strong>Intent处理‌</strong>：ViewModel接收Intent后触发业务逻辑（如网络请求），生成新State。</li>
+<li>‌<strong>状态更新‌</strong>：State通过<code>@Published</code>（Combine）或<code>BehaviorSubject</code>（RxSwift）推送至View。</li>
+<li>‌<strong>UI渲染‌</strong>：View通过<code>sink</code>或<code>subscribe</code>监听State变化，自动更新界面。</li>
+</ol>
+</li>
+</ul>
+<h4 id="4-3、与iOS原生组件集成"><a href="#4-3、与iOS原生组件集成" class="headerlink" title="4-3、与iOS原生组件集成"></a>4-3、与iOS原生组件集成</h4><ul>
+<li>‌<strong>UITableView&#x2F;UICollectionView‌</strong>：在自定义Cell中绑定State数据，通过Diffable Data Source实现高效列表更新。</li>
+<li>‌<strong>SwiftUI兼容‌</strong>：MVI天然适配SwiftUI的声明式语法，通过<code>@ObservedObject</code>或<code>@StateObject</code>连接ViewModel。</li>
+</ul>
+<h4 id="4-4、优势与注意事项"><a href="#4-4、优势与注意事项" class="headerlink" title="4-4、优势与注意事项"></a>4-4、优势与注意事项</h4><ul>
+<li>‌<strong>优势‌</strong>：状态可预测性强，便于调试；通过单一State简化复杂UI逻辑。</li>
+<li>‌<strong>注意事项‌</strong>：需合理划分State粒度，避免过度渲染；对于简单场景可能引入冗余代码。</li>
+</ul>
+<p>完整示例可参考鸿蒙MVI的实现思路，其响应式状态管理与iOS生态高度契合。实际开发中可结合SwiftUI+Combine实现更简洁的MVI架构。</p>
+<h3 id="5、MVA"><a href="#5、MVA" class="headerlink" title="5、MVA"></a>5、MVA</h3><br>
+
+<h4 id="5-1、核心组件职责"><a href="#5-1、核心组件职责" class="headerlink" title="5-1、核心组件职责"></a>5-1、核心组件职责</h4><ul>
+<li><strong>Model‌</strong>：负责数据管理和业务逻辑，如网络请求或数据库操作‌；</li>
+<li><strong>‌View‌</strong>：仅处理UI展示和用户交互，不直接操作Model‌；</li>
+<li><strong>‌Adapter‌</strong>：作为桥梁，将Model数据转换为View可用的格式，并处理双向数据绑定‌。</li>
+</ul>
+<h4 id="5-2、实现步骤"><a href="#5-2、实现步骤" class="headerlink" title="5-2、实现步骤"></a>5-2、实现步骤</h4><br>
+
+<h5 id="示例代码结构"><a href="#示例代码结构" class="headerlink" title="示例代码结构"></a>示例代码结构</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Model层</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">UserModel</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">let</span> age: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// View层</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserView</span>: <span class="title class_">UIView</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> nameLabel <span class="operator">=</span> <span class="type">UILabel</span>()</span><br><span class="line">    <span class="keyword">let</span> ageLabel <span class="operator">=</span> <span class="type">UILabel</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">update</span>(<span class="params">with</span> <span class="params">user</span>: <span class="type">UserModel</span>) &#123;</span><br><span class="line">        nameLabel.text <span class="operator">=</span> user.name</span><br><span class="line">        ageLabel.text <span class="operator">=</span> <span class="string">&quot;Age: <span class="subst">\(user.age)</span>&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Adapter层</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserAdapter</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> view: <span class="type">UserView</span></span><br><span class="line">    <span class="keyword">let</span> model: <span class="type">UserModel</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">init</span>(<span class="params">view</span>: <span class="type">UserView</span>, <span class="params">model</span>: <span class="type">UserModel</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.view <span class="operator">=</span> view</span><br><span class="line">        <span class="keyword">self</span>.model <span class="operator">=</span> model</span><br><span class="line">        view.update(with: model)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">func</span> <span class="title function_">updateModel</span>(<span class="params">newModel</span>: <span class="type">UserModel</span>) &#123;</span><br><span class="line">        model <span class="operator">=</span> newModel</span><br><span class="line">        view.update(with: newModel)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h5><ul>
+<li><strong>‌数据绑定‌</strong>：Adapter监听Model变化并更新View，反之亦然‌；</li>
+<li><strong>‌解耦‌</strong>：View通过Adapter间接操作Model，避免直接依赖‌。</li>
+</ul>
+<h4 id="5-3、与MVC-MVVM对比"><a href="#5-3、与MVC-MVVM对比" class="headerlink" title="5-3、与MVC&#x2F;MVVM对比"></a>5-3、与MVC&#x2F;MVVM对比</h4><ul>
+<li><strong>‌MVC‌</strong>：Controller易臃肿，View可能依赖Model‌；</li>
+<li><strong>‌MVVM‌</strong>：依赖响应式框架（如RAC），适合复杂数据流；</li>
+<li><strong>‌MVA‌</strong>：轻量级，适合中等复杂度项目，无需额外框架‌。</li>
+</ul>
+<h4 id="5-4、适用场景"><a href="#5-4、适用场景" class="headerlink" title="5-4、适用场景"></a>5-4、适用场景</h4><ul>
+<li>需要简化Controller逻辑的中小型项目‌；</li>
+<li>团队对响应式编程不熟悉时，MVA更易维护‌。</li>
+</ul>
+<p>通过合理划分职责，MVA能有效提升iOS代码的可读性和可测试性‌。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/技术/">技术</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/iOS/">iOS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2025 Mofashy
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
